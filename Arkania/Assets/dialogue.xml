@@ -1,0 +1,26 @@
+<Dialogue>
+  <OptionSet>
+	<OptionSetId>0</OptionSetId>
+	<Question>Hello, this is your quest</Question>
+	<Option>
+	<Text>Option a</Text>
+	<Action>set 1</Action>
+	</Option>
+	<Option>
+	<Text>Option b</Text>
+	</Option>
+	<Option>
+	<Text>Option c</Text>
+	</Option>
+  </OptionSet>
+   <OptionSet>
+	<OptionSetId>1</OptionSetId>
+	<Question>Hey, you chose option a</Question>
+	<Option>
+	<Text>Option a1</Text>
+	</Option>
+	<Option>
+	<Text>Option a2</Text>
+	</Option>
+  </OptionSet>
+</Dialogue>

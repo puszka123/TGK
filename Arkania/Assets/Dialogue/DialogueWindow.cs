@@ -2,35 +2,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class DialogueWindow : MonoBehaviour {
 
     private int cursor = 0;
-    private string[] intros = new string[50];
-    private string intro1 = "Hello, this is your quest";
-    private string intro2 = "Hey, you chose option a";
-    private string[] options = { "Option a", "Option b", "Option c" };
-    private string[] other_options = { "Option a1", "Option a2" };
-    private int current_option_set = 0;
-    private string[][] option_list = new string[50][];
-    private int option_list_length = 2;
+
     bool show = false;
     //string[] shown_options;
 
 
-    public UnityStandardAssets.Characters.FirstPerson.FirstPersonController PlayerController;
+    FirstPersonController PlayerController;
+    DialogueActor actor;
+    private int current_option_set = 0;
 
 
     // Use this for initialization
     void Start () {
-        intros[0] = intro1;
-        intros[1] = intro2;
-        option_list[0] = options;
-        option_list[1] = other_options;
+        
+        PlayerController = GameObject.FindObjectOfType<FirstPersonController>();
+        Debug.Log(PlayerController.name);
+        actor = gameObject.GetComponent<DialogueActor>();
+
+        //current_option_set = actor.getOptionSetById("0");
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -38,7 +37,7 @@ public class DialogueWindow : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (cursor <= options.Length - 2) cursor++;
+            if (cursor <= actor.Dialogue[current_option_set].Count - 2) cursor++;
         }
     }
 
@@ -46,17 +45,18 @@ public class DialogueWindow : MonoBehaviour {
     {
         if(show)
         {
-            string[] shown_options = option_list[current_option_set];
+            //string[] shown_options = option_list[current_option_set];
 
-            GUI.Label(new Rect(10, 10, 300, 20), intros[current_option_set]);
-            for (int i = 0; i < shown_options.Length; i++)
+            GUI.Label(new Rect(10, 10, 300, 20), actor.Questions[current_option_set]);
+
+            List<string> options = actor.Dialogue[current_option_set];
+            for (int i = 0; i < options.Count; i++)
             {
                 string msg = "";
                 if (cursor == i) msg += ">>> ";
-                msg += shown_options[i];
+                msg += options[i];
 
-                GUI.Label(new Rect(10, 10 + 50 * (i+1), 300, 20), msg);
-
+                GUI.Label(new Rect(10, 10 + 50 * (i + 1), 300, 20), msg);
             }
         }
 
@@ -64,35 +64,41 @@ public class DialogueWindow : MonoBehaviour {
 
     public void OnTalkPrompt()
     {
-        if (current_option_set == 0 && cursor == 0)
-        {
-            current_option_set = 1;
-        }
-        else
-        {
-            ToggleShow();
-        }
-    }
-
-    public void ToggleShow()
-    {
         if (show == false)
         {
+            current_option_set = actor.getOptionSetById("0");
             show = true;
             cursor = 0;
-            current_option_set = 0;
-        }
-        else show = false;
-
-        if (show)
-        {
             PlayerController.CanMoveCamera = false;
             PlayerController.CanMove = false;
+
         }
         else
         {
-            PlayerController.CanMoveCamera = true;
-            PlayerController.CanMove = true;
+            Debug.Log(cursor);
+            Debug.Log(current_option_set);
+            string action = actor.Actions[current_option_set][cursor];
+
+            string[] command = action.Split(' ');
+
+
+
+            if (command.Length > 1 && command[0].Equals("set"))
+            {
+                current_option_set = actor.getOptionSetById(command[1]);
+            }
+            else
+            {
+                show = false;
+                PlayerController.CanMoveCamera = true;
+                PlayerController.CanMove = true;
+            }
+
+            
         }
+
+
+
     }
+
 }

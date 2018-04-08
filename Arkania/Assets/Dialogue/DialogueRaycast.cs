@@ -10,6 +10,8 @@ public class DialogueRaycast : MonoBehaviour {
 
     public DialogueWindow window;
 
+    float lastPressed;
+
 
     // Use this for initialization
     void Start () {
@@ -22,21 +24,28 @@ public class DialogueRaycast : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (lastPressed + 0.2f < Time.time)
+            {
+                lastPressed = Time.time;
+                if (Physics.Raycast(transform.position, fwd, out hit))
+                {
+                    if (hit.distance < range)
+                    {
+                        if (hit.collider is CapsuleCollider)
+                        {
+                            DialogueWindow window = hit.transform.gameObject.GetComponent(typeof(DialogueWindow)) as DialogueWindow;
+                            //Debug.Log(actor.actorName);
+                            window.OnTalkPrompt();
+
+                        }
+
+                    }
+                }
+            }
             //pistolSparks.particleEmitter.Emit();
             //audio.Play();
 
-            if (Physics.Raycast(transform.position, fwd, out hit))
-            {
-                if (hit.distance < range)
-                {
-                    if(hit.collider is CapsuleCollider)
-                    {
-                        window.OnTalkPrompt();
 
-                    }
-                    
-                }
-            }
         }
     }
 }
