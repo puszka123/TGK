@@ -28,8 +28,6 @@ public class PlayerStats : MonoBehaviour
     public float walkSpeed = 10.0f;
     public float runSpeed = 20.0f;
 
-    public GUITexture hitTexture;
-
 
     void Awake()
     {
@@ -67,7 +65,6 @@ public class PlayerStats : MonoBehaviour
                                    -Screen.height * 0.5f,
                                    Screen.width,
                                    Screen.height);
-        hitTexture.pixelInset = currentRes;
     }
 
     void Update()

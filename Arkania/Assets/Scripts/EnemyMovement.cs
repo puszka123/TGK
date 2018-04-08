@@ -5,14 +5,16 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour {
 
-
+    public GameObject playerObject;
     Transform player;
     NavMeshAgent nav;
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = playerObject.transform;
         nav = GetComponent<NavMeshAgent>();
+        
+        gameObject.GetComponent<Animator>().SetTrigger("startedWalking");
 
     }
     // Use this for initialization
