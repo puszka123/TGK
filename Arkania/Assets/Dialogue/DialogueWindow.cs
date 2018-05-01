@@ -86,6 +86,7 @@ public class DialogueWindow : MonoBehaviour {
             if (command.Length > 1 && command[0].Equals("set"))
             {
                 current_option_set = actor.getOptionSetById(command[1]);
+                cursor = 0;
             }
             else
             {

@@ -41,6 +41,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        private Animator animator;
+        public GameObject animation;
 
         private bool m_CanRun = true;
         private bool m_CanMove = true;
@@ -51,7 +53,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
-            m_OriginalCameraPosition = m_Camera.transform.localPosition;
+            m_OriginalCameraPosition = -m_Camera.transform.localPosition;
             m_FovKick.Setup(m_Camera);
             m_HeadBob.Setup(m_Camera, m_StepInterval);
             m_StepCycle = 0f;
@@ -59,12 +61,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+            animator = animation.GetComponent<Animator>();
         }
 
 
         // Update is called once per frame
         private void Update()
         {
+            if (m_IsWalking)
+            {
+                animator.SetTrigger("startedWalking");
+            }
+            else
+            {
+                animator.SetTrigger("stoppedWalking");
+
+            }
+
             RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
@@ -85,6 +98,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            var CharacterRotation = Camera.main.transform.rotation;
+            CharacterRotation.x = 0;
+            CharacterRotation.z = 0;
+
+            transform.rotation = CharacterRotation;
         }
 
         public bool CanRun
@@ -151,7 +170,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             ProgressStepCycle(speed);
 
-            UpdateCameraPosition(speed);
+            
+
+            //UpdateCameraPosition(speed);
 
             m_MouseLook.UpdateCursorLock();
         }
@@ -221,6 +242,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
             }
             m_Camera.transform.localPosition = newCameraPosition;
+            
         }
 
 
@@ -256,6 +278,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     StopAllCoroutines();
                     StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
                 }
+
+
             }
             else
                 speed = 0;
@@ -267,7 +291,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            if (m_CanMoveCamera) m_MouseLook.LookRotation (transform, m_Camera.transform);
+            //if (m_CanMoveCamera) m_MouseLook.LookRotation (transform, m_Camera.transform);
+
         }
 
 

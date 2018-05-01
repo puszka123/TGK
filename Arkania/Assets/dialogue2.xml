@@ -1,0 +1,29 @@
+<Dialogue>
+  <OptionSet>
+	<OptionSetId>0</OptionSetId>
+	<Question>Hello, this is some other dialogue</Question>
+	<Option>
+	<Text>Option a</Text>
+	</Option>
+	<Option>
+	<Text>Option b</Text>
+	</Option>
+	<Option>
+	<Text>Option c (pick meee)</Text>
+	<Action>set 1</Action>
+	</Option>
+	<Option>
+	<Text>Option d</Text>
+	</Option>
+  </OptionSet>
+   <OptionSet>
+	<OptionSetId>1</OptionSetId>
+	<Question>Hey, you chose option c, would you like a cookie?</Question>
+	<Option>
+	<Text>Yes</Text>
+	</Option>
+	<Option>
+	<Text>No</Text>
+	</Option>
+  </OptionSet>
+</Dialogue>
