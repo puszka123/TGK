@@ -44,6 +44,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Animator animator;
         public GameObject animation;
 
+        private bool isWalking = false;
+
         private bool m_CanRun = true;
         private bool m_CanMove = true;
         private bool m_CanMoveCamera = true;
@@ -68,15 +70,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            if (m_IsWalking)
-            {
-                animator.SetTrigger("startedWalking");
-            }
-            else
-            {
-                animator.SetTrigger("stoppedWalking");
 
-            }
 
             RotateView();
             // the jump state needs to read here to make sure it is not missed
@@ -104,6 +98,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
             CharacterRotation.z = 0;
 
             transform.rotation = CharacterRotation;
+
+            if (m_CharacterController.velocity.x > 0.0f || m_CharacterController.velocity.z > 0.0f)
+            {
+                if (!isWalking)
+                {
+                    animator.SetTrigger("startedWalking");
+                    isWalking = true;
+                }
+            }
+            else
+            {
+                if (isWalking)
+                {
+                    animator.SetTrigger("stoppedWalking");
+                    isWalking = false;
+                }
+            }
         }
 
         public bool CanRun
