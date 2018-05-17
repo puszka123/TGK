@@ -17,6 +17,8 @@ public class DialogueWindow : MonoBehaviour {
     DialogueActor actor;
     private int current_option_set = 0;
 
+    private GUIStyle guiStyle = new GUIStyle();
+
 
     // Use this for initialization
     void Start () {
@@ -45,11 +47,33 @@ public class DialogueWindow : MonoBehaviour {
 
     void OnGUI()
     {
-        if(show)
+        guiStyle.fontSize = 10;
+        guiStyle.normal.textColor = Color.white;
+        if (show)
         {
-            //string[] shown_options = option_list[current_option_set];
 
-            GUI.Label(new Rect(10, 10, 300, 20), actor.Questions[current_option_set]);
+            Texture2D targetTexture = new Texture2D(350, 200);
+            //GetComponent<Renderer>().material.mainTexture = targetTexture;
+
+            Color[] fillColorArray = targetTexture.GetPixels();
+
+            for (int i = 0; i < fillColorArray.Length; ++i)
+            {
+                Color color = new Color(0,0,0);
+                color.a = 0.7f;
+                fillColorArray[i] = color;
+            }
+
+            targetTexture.SetPixels(fillColorArray);
+
+            targetTexture.Apply();
+
+
+
+            GUI.DrawTexture(new Rect(Screen.width / 2 - 150, Screen.height * 3 / 5, 350, 200), targetTexture);
+
+            GUI.Label(new Rect(Screen.width / 2 - 150 + 10, Screen.height*3/5 + 10, 300, 20), actor.Questions[current_option_set], guiStyle);
+
 
             List<string> options = actor.Dialogue[current_option_set];
             for (int i = 0; i < options.Count; i++)
@@ -58,7 +82,7 @@ public class DialogueWindow : MonoBehaviour {
                 if (cursor == i) msg += ">>> ";
                 msg += options[i];
 
-                GUI.Label(new Rect(10, 10 + 50 * (i + 1), 300, 20), msg);
+                GUI.Label(new Rect(Screen.width/2 - 150 + 10, Screen.height * 3 / 5 + 50 + 15 * (i + 1), 300, 20), msg, guiStyle);
             }
         }
 
