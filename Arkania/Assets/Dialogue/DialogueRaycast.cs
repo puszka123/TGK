@@ -22,12 +22,16 @@ public class DialogueRaycast : MonoBehaviour {
 	void Update () {
         fwd = transform.TransformDirection(Vector3.forward);
 
+        int layerMask = 1 << 8;
+
+        layerMask = ~layerMask;
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (lastPressed + 0.2f < Time.time)
             {
                 lastPressed = Time.time;
-                if (Physics.Raycast(transform.position, fwd, out hit))
+                if (Physics.Raycast(transform.position, fwd, out hit, Mathf.Infinity, layerMask))
                 {
                     if (hit.distance < range)
                     {

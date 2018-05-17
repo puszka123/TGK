@@ -13,6 +13,7 @@ public class DialogueWindow : MonoBehaviour {
 
 
     FirstPersonController PlayerController;
+    ThirdPersonCamera Camera;
     DialogueActor actor;
     private int current_option_set = 0;
 
@@ -21,6 +22,7 @@ public class DialogueWindow : MonoBehaviour {
     void Start () {
         
         PlayerController = GameObject.FindObjectOfType<FirstPersonController>();
+        Camera = GameObject.FindObjectOfType<ThirdPersonCamera>();
         Debug.Log(PlayerController.name);
         actor = gameObject.GetComponent<DialogueActor>();
 
@@ -69,7 +71,7 @@ public class DialogueWindow : MonoBehaviour {
             current_option_set = actor.getOptionSetById("0");
             show = true;
             cursor = 0;
-            PlayerController.CanMoveCamera = false;
+            Camera.SetCanMove(false);
             PlayerController.CanMove = false;
 
         }
@@ -91,7 +93,7 @@ public class DialogueWindow : MonoBehaviour {
             else
             {
                 show = false;
-                PlayerController.CanMoveCamera = true;
+                Camera.SetCanMove(true);
                 PlayerController.CanMove = true;
             }
 

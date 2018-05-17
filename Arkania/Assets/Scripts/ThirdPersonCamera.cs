@@ -12,6 +12,8 @@ public class ThirdPersonCamera : MonoBehaviour {
 
     private Camera cam;
 
+    private bool canMove = true;
+
     private float distance = 10.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
@@ -27,18 +29,29 @@ public class ThirdPersonCamera : MonoBehaviour {
 	}
     void LateUpdate()
     {
-        Vector3 dir = new Vector3(0, 0, -distance);
-        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.position = lookAt.position + rotation * -dir;
-        camTransform.LookAt(lookAt.position);
+        if (canMove)
+        {
+            Vector3 dir = new Vector3(-10.0f, 0, -distance);
+            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+            camTransform.position = lookAt.position + rotation * -dir;
+            camTransform.LookAt(lookAt.position);
+        }
 
     }
     // Update is called once per frame
     void Update () {
-        currentX += Input.GetAxis("Mouse X");
-        currentY += Input.GetAxis("Mouse Y");
+        if (canMove)
+        {
+            currentX += Input.GetAxis("Mouse X");
+            currentY += Input.GetAxis("Mouse Y");
 
-        currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+            currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+        }
 
+    }
+
+    public void SetCanMove(bool a)
+    {
+        canMove = a;
     }
 }
