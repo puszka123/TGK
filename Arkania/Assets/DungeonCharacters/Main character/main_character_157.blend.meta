@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: f086a4385930bad4daf6ecec991ab028
-timeCreated: 1524512870
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -69,6 +67,16 @@ ModelImporter:
     400058: Upper_Arm_R
     400060: Upper_Leg_L
     400062: Upper_Leg_R
+    2300000: Boots
+    2300002: Character
+    2300004: Hair
+    2300006: Pants
+    2300008: Shirt
+    3300000: Boots
+    3300002: Character
+    3300004: Hair
+    3300006: Pants
+    3300008: Shirt
     4300000: Hair
     4300002: Boots
     4300004: Shirt
@@ -87,7 +95,33 @@ ModelImporter:
     13700004: Hair
     13700006: Pants
     13700008: Shirt
-  externalObjects: {}
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boots__Boots
+    second: {fileID: 2100000, guid: 2b88ccbe26077b24d888970352a4857b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair
+    second: {fileID: 2100000, guid: ea21399c48348134090b53fce4e073bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants__Pants
+    second: {fileID: 2100000, guid: 54f94563beb848e4e9ae5bfcb51f08d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shirt__Shirt
+    second: {fileID: 2100000, guid: 1c593e04b928fc142a357deb76e517a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin__Skin
+    second: {fileID: 2100000, guid: 73b8fe6e72dbe914785c8efa62e2b86c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -106,6 +140,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5

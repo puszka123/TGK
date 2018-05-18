@@ -39,7 +39,7 @@ public class PlayerStats : MonoBehaviour
 
         lastPosition = transform.position;
     }
-
+   /*
     void OnGUI()
     {
         GUI.DrawTexture(new Rect(Screen.width - barWidth - 10,
@@ -57,7 +57,7 @@ public class PlayerStats : MonoBehaviour
                                  currentStamina * barWidth / maxStamina,
                                  barHeight),
                         staminaTexture);
-    }
+    }*/
 
     void Start()
     {
