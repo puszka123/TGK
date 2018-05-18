@@ -99,7 +99,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             transform.rotation = CharacterRotation;
 
-            if (m_CharacterController.velocity.x > 0.0f || m_CharacterController.velocity.z > 0.0f)
+            if (m_CharacterController.velocity.x != 0.0f || m_CharacterController.velocity.z != 0.0f)
             {
                 if (!isWalking)
                 {
