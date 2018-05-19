@@ -1,0 +1,41 @@
+<Dialogue>
+  <OptionSet>
+	<OptionSetId>0</OptionSetId>
+	<Question>Nie wiem skąd się wzięli! Chodź za mną. 
+	Mieszkam niedaleko w lesie.</Question>
+	<Option>
+		<Text>Idź</Text>
+		<Mission>follow_hermer</Mission>
+	</Option>
+	<Option>
+		<Text>Nie idź</Text>
+	</Option>
+  </OptionSet>
+   <OptionSet>
+	<OptionSetId>1</OptionSetId>
+	<Question>Dzięki za pomoc. Przeklęta wyspa! Odkąd tu przypłynąłem, 
+	to zdarzają mi się same złe rzeczy. Co tu robisz?</Question>
+	<Option>
+		<Text>Znasz Monera? Wiesz gdzie może teraz być?</Text>
+		<Action>set 2</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>2</OptionSetId>
+	<Question>Moner? Ten od Jony? nie wiem. A co zrobił?</Question>
+	<Option>
+		<Text>Muszę z nim porozmawiać.</Text>
+		<Action>set 3</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>3</OptionSetId>
+	<Question>Spytaj Tyrion. On zna wszystkich. Ja nic nie wiem. 
+	Robi się już późno. Jak chcesz możesz zostać na noc. 
+	Na górze znajdziesz sobie miejsce.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<Mission>rim_find_gold</Action>
+	</Option>
+  </OptionSet>
+</Dialogue>

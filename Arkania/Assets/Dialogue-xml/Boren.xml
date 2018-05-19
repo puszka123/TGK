@@ -1,0 +1,133 @@
+<Dialogue>
+  <!-- Odpala się przy pierwszej rozmowie-->
+  <OptionSet>
+	<OptionSetId>0</OptionSetId>
+	<Question>Potrzebuję pomocy! Moje dzieci! Nie mogę ich nigdzie znaleźć!</Question>
+	<Option>
+		<Text>Chcę się jedynie dowiedzieć gdzie jest Moner.</Text>
+		<Action>set A1</Action>
+	</Option>
+	<Option>
+		<Text>Możesz mi powiedzieć coś więcej?</Text>
+		<Action>set B1</Action>
+	</Option>
+  </OptionSet>
+   <OptionSet>
+	<OptionSetId>A1</OptionSetId>
+	<Question>Nie wiem gdzie jest. A teraz, jeśli nie masz zamiaru mi pomóc to odejdź. Muszę je znaleźć!</Question>
+	<Option>
+		<Text>Mogę ci pomóc.</Text>
+		<Action>set B1</Action>
+	</Option>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>B1</OptionSetId>
+	<Question>Trójka. Są jeszcze małe. Nigdy im się nie zdarzało uciekać. Szukałem ich już po całej wsi!</Question>
+	<Option>
+		<Text>Postaram się dowiedzieć gdzie są.</Text>
+		<Action>set B2</Action>
+	</Option>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>B2</OptionSetId>
+	<Question>Dziękuję!</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<Mission>find_children</Mission>
+	</Option>
+  </OptionSet>
+  <!-- Odpala się po rozmowie z Hermerem-->
+  <OptionSet>
+	<OptionSetId>1LB</OptionSetId>
+	<Question>Znalazłaś je?</Question>
+	<Option>
+		<Text>Ktoś ukradł złoto Hermerowi. Wiesz może kto mógł to zrobić?</Text>
+		<Action>set 1LB1</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>1LB1</OptionSetId>
+	<Question>Nie wiem. Nie interesują mnie jego problemy. Zwykły oszust!</Question>
+	<Option>
+		<Text>Ukradłeś jego złoto.</Text>
+		<Action>set 1LB1A</Action>
+	</Option>
+	<Option>
+		<Text>Podobno jesteś zadłużony.</Text>
+		<Action>set 1LB1B</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>1LB1A</OptionSetId>
+	<Question>Ja? Jakie masz na mnie dowody? Przeszukaj sobie mój dom. 
+	Nic nie znajdziesz. A teraz, daj mi spokój.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>1LB1B</OptionSetId>
+	<Question>Musiałem kupić nowy sprzęt. Zamówiłem go u Tyriona. 
+	Jednakże, jedno z moich dzieci zachorowało. 
+	Nie starczyło mi już pieniędzy, a Tyrion żądał jeszcze dodatkowej opłaty!</Question>
+	<Option>
+		<Text>Przekonam go, żeby ci odpuścił.</Text>
+		<Action>set 1LB2A</Action>
+	</Option>
+	<Option>
+		<Text>Niestety, nie mogę nic z tym zrobić.</Text>
+		<Action>set 1LB2B</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>1LB2A</OptionSetId>
+	<Question>Dziękuję. Będę bardzo wdzięczny.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<Mission>boren_debt</Mission>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>1LB2B</OptionSetId>
+	<Question>I tak nie myślałem, że ktokowlwiek mi pomoże.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+	</Option>
+  </OptionSet>
+  <!-- Odpala się po znalezieniu dzieci-->
+  <OptionSet>
+	<OptionSetId>2LB</OptionSetId>
+	<Question>Znalazłaś je?</Question>
+	<Option>
+		<Text>Twoje dzieci.</Text>
+		<Action>set 2LB1</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>2LB1</OptionSetId>
+	<Question>Dziękuję! Kamień mi z serca spadł! Gdzie były?</Question>
+	<Option>
+		<Text>Niedaleko mglistego lasu. Na północ od wsi.</Text>
+		<Action>set 2LB2</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>2LB2</OptionSetId>
+	<Question>Mglisty las... Już wiem czemu dzieci tam pobiegły.
+	Ale to już mniej ważne. Wiem gdzie jest Moner. 
+	W mglistym lesie na północnym zachodzie znajduje się wejście
+	w głąb ziemi. Tyle wiem.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<MissionComplete>find_children</MissionComplete>
+		<MissionComplete>find_moner</MissionComplete>
+		<Mission>talk_to_moner</Mission>
+	</Option>
+  </OptionSet>
+</Dialogue>

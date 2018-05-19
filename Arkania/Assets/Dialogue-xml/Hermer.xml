@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dialogue>
+  <!-- Odpala się przy pierwszej rozmowie-->
+  <OptionSet>
+	<OptionSetId>0</OptionSetId>
+	<Question>Czego tu szuka dowódca, hmm...?</Question>
+	<Option>
+		<Text>Znasz może Monera?</Text>
+		<Action>set 1</Action>
+	</Option>
+  </OptionSet>
+   <OptionSet>
+	<OptionSetId>1</OptionSetId>
+	<Question>Znam go tak jak więszkość mieszkańców. Przyjeżdża pomagać Jonie. 
+	A o co dokładnie chodzi? Nie mam czasu na rozmowy.</Question>
+	<Option>
+		<Text>Muszę z nim porozmawiać.</Text>
+		<Action>set 2</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>2</OptionSetId>
+	<Question>W sumie jesli chcesz, żebym ci pomógł, 
+	to najpierw dowiedz się kto mi ukradł moja sakwę ze złotem. 
+	Wczoraj jak wróciłem z podróży, to zauważyłem jej brak. To na pewno ten dłużnik Boren. 
+	Jak mi ją odzyskasz to wtedy ci pomogę.</Question>
+	<Option>
+		<Text>Pomogę ci.</Text>
+		<Action>set A2</Action>
+	</Option>
+	<Option>
+		<Text>Nie mam na to czasu.</Text>
+		<Action>set B2</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>A2</OptionSetId>
+	<Question>W takim razie powodzenia.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<Mission>find_gold</Mission>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>B2</OptionSetId>
+	<Question>To daj mi już spokój. Muszę odpocząć.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+	</Option>
+  </OptionSet>
+  <!-- Odpala się przy znalezieniu złota-->
+  <OptionSet>
+	<OptionSetId>1LH</OptionSetId>
+	<Question>Znalazłaś?</Question>
+	<Option>
+		<Text>Tak, Rim ją ukradł.</Text>
+		<Action>set 1LH1</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>1LH1</OptionSetId>
+	<Question>Ten cholerny drań! Zapłaci mi za to! Mówiłaś, że szukasz Monera. 
+	Myślę, że Tyrion może coś wiedzieć. Ostatnio Moner mu coś zlecił.
+	Jednak, jeśli chcesz coś od niego wyciągnąć, to musisz coś na niego mieć. 
+	Wiem, że oszukał pewnego zastępcę na zamówieniu - użył tańszych materiałów. 
+	No, to powodzenia. A, jak coś to nie ja ci to powiedziałem.
+	</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<MissionComplete>find_gold</MissionComplete>
+	</Option>
+  </OptionSet>
+</Dialogue>

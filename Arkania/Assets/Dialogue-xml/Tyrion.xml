@@ -1,0 +1,62 @@
+<Dialogue>
+  <OptionSet>
+	<OptionSetId>0</OptionSetId>
+	<Question>Czego potrzebujesz?</Question>
+	<Option>
+		<Text>Szukam Monera. Wiesz gdzie może być?</Text>
+		<Action>set 1</Action>
+		<Condition>first_talk</Condition>
+	</Option>
+	<Option>
+		<Text>Spłacę dług Borena.</Text>
+		<Action>set 3LT</Action>
+		<Condition>boren_debt</Condition>
+	</Option>
+	<Option>
+		<Text>Hermer wspominał, że wiesz gdzie może być Moner.</Text>
+		<Action>set 1LT</Action>
+		<Condition>hermer_first_talk</Condition>
+	</Option>
+	<Option>
+		<Text>Powiesz mi gdzie jest Moner, albo twoje przekręty wyjdą na jaw. Chyba nie chcesz pogorszyć sobie reputacji?</Text>
+		<Action>set 2LT</Action>
+		<Condition>find_gold</Condition>
+	</Option>
+  </OptionSet>
+   <OptionSet>
+	<OptionSetId>1</OptionSetId>
+	<Question>Nie mam czasu na rozmowy. Mam dużo pracy.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>3LT</OptionSetId>
+	<Question>W takim razie jesteśmy kwita. Nie zawracaj mi więcej głowy. Mam dużo pracy.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<MissionComplete>boren_debt</MissionComplete>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>1LT</OptionSetId>
+	<Question>Hermer za dużo gada. Jeździ po tej cholernej wyspie i zarabia na oszustwach. 
+	Ja nie mam nic z nim wspólnego, ani z tym całym Monerem.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>2LT</OptionSetId>
+	<Question>Przeklęty handlarz! Ostatnio miałem zamówienie od niego na miecz z irinu. 
+	Nie wiem po co mu to, w końcu i tak tego nie użyje.
+	Czasami gadał sam do siebie. 
+	Mówił o jakichś schodach prowadzących w dół, w mglistym lesie, w północno-zachodniej części. 
+	Straszny dziwak z niego. Co ci na nim tak zależy?</Question>
+	<Option>
+		<Text>To już moja sprawa.</Text>
+		<MissionComplete>find_moner</MissionComplete>
+		<Mission>talk_to_moner</Mission>
+	</Option>
+  </OptionSet>
+</Dialogue>

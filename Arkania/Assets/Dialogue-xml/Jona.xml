@@ -1,0 +1,40 @@
+<Dialogue>
+  <OptionSet>
+	<OptionSetId>0</OptionSetId>
+	<Question>Witam! Mogę w czymś pomóc?</Question>
+	<Option>
+		<Text>Czy ostatnio działo się w tej wsi coś niepokojącego?</Text>
+		<Action>set 1</Action>
+	</Option>
+  </OptionSet>
+   <OptionSet>
+	<OptionSetId>1</OptionSetId>
+	<Question>We wsi nie było żadnych dziwnych zdarzeń odkąd sięgam pamięcią. 
+	Widziałaś może mojego wnuka?</Question>
+	<Option>
+		<Text>A jak wygląda?</Text>
+		<Action>set 2</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>2</OptionSetId>
+	<Question>Moner. Nie znasz go? Ah tak, nie jesteś stąd! Mój wnuk ma już prawie 40 lat! 
+	Przyjechał tydzień temu, żeby mi pomóc. 
+	Muszę przyznać, że ostatnio dziwnie się zachowywał. 
+	Czasami w nocy słyszałam jak coś mamrocze. A teraz zniknął! 
+	Miał być jeszcze tydzień. Nigdy mu się to nie zdarzało.
+	</Question>
+	<Option>
+		<Text>Postaram się go znaleźć.</Text>
+		<Action>set 3</Action>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>3</OptionSetId>
+	<Question>Dziękuję! Ważne, żeby nic mu się nie stało.</Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<Mission>find_moner</Mission>
+	</Option>
+  </OptionSet>
+</Dialogue>
