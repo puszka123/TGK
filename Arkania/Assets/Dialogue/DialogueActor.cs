@@ -10,6 +10,8 @@ public class DialogueActor : MonoBehaviour {
 
     List<List<string>> dialogueOptionSets = new List<List<string>>();
     List<List<string>> dialogueActions = new List<List<string>>();
+    List<List<string>> dialogueMissions = new List<List<string>>();
+    List<List<string>> dialogueMissionCompletes = new List<List<string>>();
 
     List<string> optionSetIds = new List<string>();
     List<string> optionSetQuestions = new List<string>();
@@ -35,6 +37,8 @@ public class DialogueActor : MonoBehaviour {
 
             List<string> options = new List<string>();
             List<string> actions = new List<string>();
+            List<string> missions = new List<string>();
+            List<string> missionCompletes = new List<string>();
 
 
             foreach (XmlNode dialogueOption in dialogueOptions)
@@ -56,10 +60,27 @@ public class DialogueActor : MonoBehaviour {
                 }
                 actions.Add(action);
 
+                XmlNodeList dialogueOptionMissions = dialogueOption.SelectNodes("Mission");
+                string mission = "";
+                foreach (XmlNode dialogueOptionMission in dialogueOptionMissions)
+                {
+                    mission += dialogueOptionMission.InnerText;
+                }
+                missions.Add(mission);
+
+                XmlNodeList dialogueOptionMissionCompletes = dialogueOption.SelectNodes("MissionComplete");
+                string missionComplete = "";
+                foreach (XmlNode dialogueOptionMissionComplete in dialogueOptionMissionCompletes)
+                {
+                    missionComplete += dialogueOptionMissionComplete.InnerText;
+                }
+                missionCompletes.Add(missionComplete);
 
             }
             dialogueOptionSets.Add(options);
             dialogueActions.Add(actions);
+            dialogueMissions.Add(missions);
+            dialogueMissionCompletes.Add(missionCompletes);
 
 
         }
@@ -75,6 +96,18 @@ public class DialogueActor : MonoBehaviour {
     {
         get { return dialogueActions; }
         set { dialogueActions = value; }
+    }
+
+    public List<List<string>> Missions
+    {
+        get { return dialogueMissions; }
+        set { dialogueMissions = value; }
+    }
+
+    public List<List<string>> MissionCompletes
+    {
+        get { return dialogueMissionCompletes; }
+        set { dialogueMissionCompletes = value; }
     }
 
     public List<string> Questions

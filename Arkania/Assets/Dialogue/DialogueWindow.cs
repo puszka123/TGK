@@ -15,6 +15,8 @@ public class DialogueWindow : MonoBehaviour {
     FirstPersonController PlayerController;
     ThirdPersonCamera Camera;
     DialogueActor actor;
+    public StoryObject story;
+    
     private int current_option_set = 0;
 
     private GUIStyle guiStyle = new GUIStyle();
@@ -28,18 +30,17 @@ public class DialogueWindow : MonoBehaviour {
         Debug.Log(PlayerController.name);
         actor = gameObject.GetComponent<DialogueActor>();
 
-        //current_option_set = actor.getOptionSetById("0");
 
     }
 
     // Update is called once per frame
     void Update () {
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             if (cursor >= 1) cursor--;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             if (cursor <= actor.Dialogue[current_option_set].Count - 2) cursor++;
         }
@@ -107,7 +108,25 @@ public class DialogueWindow : MonoBehaviour {
 
             string[] command = action.Split(' ');
 
+            List<string> missions = actor.Missions[current_option_set];
 
+            foreach(string mission in missions) {
+                if(mission != null && mission != "")
+                {
+                    story.AddMission(mission);
+                }
+            }
+
+            List<string> missionCompletes = actor.MissionCompletes[current_option_set];
+
+
+            foreach (string missionComplete in missionCompletes)
+            {
+                if (missionComplete != null && missionComplete != "")
+                {
+                    story.CompleteMission(missionComplete);
+                }
+            }
 
             if (command.Length > 1 && command[0].Equals("set"))
             {

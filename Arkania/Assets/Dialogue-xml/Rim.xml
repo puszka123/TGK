@@ -11,7 +11,7 @@
 		<Text>Nie idź</Text>
 	</Option>
   </OptionSet>
-   <OptionSet>
+  <OptionSet>
 	<OptionSetId>1</OptionSetId>
 	<Question>Dzięki za pomoc. Przeklęta wyspa! Odkąd tu przypłynąłem, 
 	to zdarzają mi się same złe rzeczy. Co tu robisz?</Question>
@@ -28,14 +28,14 @@
 		<Action>set 3</Action>
 	</Option>
   </OptionSet>
-  <OptionSet>
++<OptionSet>
 	<OptionSetId>3</OptionSetId>
 	<Question>Spytaj Tyrion. On zna wszystkich. Ja nic nie wiem. 
 	Robi się już późno. Jak chcesz możesz zostać na noc. 
 	Na górze znajdziesz sobie miejsce.</Question>
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
-		<Mission>rim_find_gold</Action>
+		<Mission>rim_find_gold</Mission>
 	</Option>
   </OptionSet>
 </Dialogue>
