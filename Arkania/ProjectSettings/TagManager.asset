@@ -7,6 +7,8 @@ TagManager:
   - dialogueWindow
   - targetSelected
   - enemy
+  - goal
+  - random
   layers:
   - Default
   - TransparentFX
