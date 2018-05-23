@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 02e60d93bba7d944aba67a79a0f6b242
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: Armature.001
     100002: Boots
@@ -48,6 +48,11 @@ ModelImporter:
     100084: Upper Arm.R
     100086: Upper Leg.L
     100088: Upper Leg.R
+    100090: Belt
+    100092: Cube
+    100094: Hand Hold.R
+    100096: Hand Hold.R_end
+    100098: Sword
     400000: Armature.001
     400002: Boots
     400004: Character
@@ -93,16 +98,26 @@ ModelImporter:
     400084: Upper Arm.R
     400086: Upper Leg.L
     400088: Upper Leg.R
+    400090: Belt
+    400092: Cube
+    400094: Hand Hold.R
+    400096: Hand Hold.R_end
+    400098: Sword
     2100000: Hair
     2100002: Boots
     2100004: Shirt
     2100006: Pants
     2100008: Skin
+    2300000: Sword
+    3300000: Sword
     4300000: Hair
     4300002: Boots
     4300004: Shirt
     4300006: Pants
     4300008: Character
+    4300010: Sword
+    4300012: Cube
+    4300014: Belt
     7400000: Run_2_001
     7400002: Walk_2_001
     7400004: Armature.001|Action
@@ -123,13 +138,13 @@ ModelImporter:
     13700004: Hair
     13700006: Pants
     13700008: Shirt
+    13700010: Belt
+    13700012: Cube
     2186277476908879412: ImportLogs
-  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -142,8 +157,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
-    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -303,7 +316,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -560,8 +573,6 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
