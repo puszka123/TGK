@@ -23,7 +23,10 @@ public class FogController : MonoBehaviour {
         {
             RenderSettings.fog = !RenderSettings.fog;
             Light light = GameObject.FindGameObjectWithTag("sun").GetComponent<Light>();
-            light.intensity = 0.05f;
+            if (!RenderSettings.fog)
+            {
+                light.intensity = 1f;
+            }
         }
     }
 }

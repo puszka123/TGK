@@ -43,6 +43,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
         private Animator animator;
         public GameObject animation;
+        public float sensivity = 10f;
+        float minFov = 15f;
+        float maxFov = 90f;
 
         private bool isWalking = false;
 
@@ -70,8 +73,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-
-
+            float fov = Camera.main.fieldOfView;
+            fov += CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") * sensivity;
+            fov = Mathf.Clamp(fov, minFov, maxFov);
+            Camera.main.fieldOfView = fov;
             RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
@@ -286,8 +291,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 // only if the player is going to a run, is running and the fovkick is to be used
                 if (m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
                 {
-                    StopAllCoroutines();
-                    StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
+                    //StopAllCoroutines();
+                    //StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
                 }
 
 
