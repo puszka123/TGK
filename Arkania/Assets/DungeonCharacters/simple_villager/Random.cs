@@ -5,10 +5,11 @@ using System;
 
 public class Random : MonoBehaviour
 {
-    public System.Random RandomGen { get; set; }
+    public static System.Random RandomGen { get; set; }
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        if(RandomGen == null)
         RandomGen = new System.Random();
     }
 

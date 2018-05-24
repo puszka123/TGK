@@ -19,7 +19,7 @@ public class VillagerWalk : MonoBehaviour {
     void Start () {
         animator = GetComponent<Animator>();
         points = GameObject.FindGameObjectsWithTag("goal");
-        random = GameObject.FindGameObjectWithTag("random").GetComponent<Random>().RandomGen;
+        random = Random.RandomGen;
         _nextPoint = points[random.Next(points.Length)].transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.destination = _nextPoint.position;
