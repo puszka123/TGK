@@ -39,7 +39,7 @@ public class PlayerStats : MonoBehaviour
 
         lastPosition = transform.position;
     }
-   /*
+   
     void OnGUI()
     {
         GUI.DrawTexture(new Rect(Screen.width - barWidth - 10,
@@ -57,7 +57,7 @@ public class PlayerStats : MonoBehaviour
                                  currentStamina * barWidth / maxStamina,
                                  barHeight),
                         staminaTexture);
-    }*/
+    }
 
     void Start()
     {
@@ -104,7 +104,7 @@ public class PlayerStats : MonoBehaviour
             speed = runSpeed;
             currentStamina -= 1;
             currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
-            canRegenerate = 5.0f;
+            canRegenerate = 1.0f;
         }
 
         if (currentStamina > 0)
@@ -134,7 +134,7 @@ public class PlayerStats : MonoBehaviour
 
     void regenerate(ref float currentStat, float maxStat)
     {
-        currentStat += maxStat * 0.005f;
+        currentStat += maxStat * 0.01f;
         Mathf.Clamp(currentStat, 0, maxStat);
     }
 
