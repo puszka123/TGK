@@ -40,6 +40,7 @@
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
 		<Mission>find_children</Mission>
+		<NextId>1LB</NextId>
 	</Option>
   </OptionSet>
   <!-- Odpala się po rozmowie z Hermerem-->
@@ -91,6 +92,7 @@
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
 		<Mission>boren_debt</Mission>
+		<NextId>2LB</NextId>
 	</Option>
   </OptionSet>
   <OptionSet>
@@ -98,6 +100,7 @@
 	<Question>I tak nie myślałem, że ktokowlwiek mi pomoże.</Question>
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
+		<NextId>2LB</NextId>
 	</Option>
   </OptionSet>
   <!-- Odpala się po znalezieniu dzieci-->

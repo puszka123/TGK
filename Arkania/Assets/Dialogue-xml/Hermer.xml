@@ -39,6 +39,7 @@
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
 		<Mission>find_gold</Mission>
+		<NextId>1LH</NextId>
 	</Option>
   </OptionSet>
   <OptionSet>
@@ -55,6 +56,10 @@
 	<Option>
 		<Text>Tak, Rim ją ukradł.</Text>
 		<Action>set 1LH1</Action>
+		<Condition>find_gold_complete</Condition>
+	</Option>
+	<Option>
+		<Text>Nie.</Text>
 	</Option>
   </OptionSet>
   <OptionSet>
