@@ -9,6 +9,7 @@ TagManager:
   - enemy
   - goal
   - random
+  - sun
   layers:
   - Default
   - TransparentFX

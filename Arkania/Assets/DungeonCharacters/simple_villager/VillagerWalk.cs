@@ -24,7 +24,6 @@ public class VillagerWalk : MonoBehaviour {
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.destination = _nextPoint.position;
         animator.SetBool("walk", true);
-        Debug.Log(_nextPoint);
 	}
 	
 	// Update is called once per frame
