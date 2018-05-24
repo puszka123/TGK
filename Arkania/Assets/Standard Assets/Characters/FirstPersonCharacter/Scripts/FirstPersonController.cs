@@ -74,7 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             float fov = Camera.main.fieldOfView;
-            fov += CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") * sensivity;
+            fov += -(CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") * sensivity);
             fov = Mathf.Clamp(fov, minFov, maxFov);
             Camera.main.fieldOfView = fov;
             RotateView();
