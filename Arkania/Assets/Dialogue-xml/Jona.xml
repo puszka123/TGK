@@ -35,6 +35,14 @@
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
 		<Mission>find_moner</Mission>
+		<NextId>NoTalk</NextId>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>NoTalk</OptionSetId>
+	<Question></Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
 	</Option>
   </OptionSet>
 </Dialogue>

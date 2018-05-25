@@ -12,6 +12,7 @@ public class DialogueActor : MonoBehaviour {
     List<List<string>> dialogueActions = new List<List<string>>();
     List<List<string>> dialogueMissions = new List<List<string>>();
     List<List<string>> dialogueMissionCompletes = new List<List<string>>();
+    List<List<string>> dialogueNextIds = new List<List<string>>();
 
     List<string> optionSetIds = new List<string>();
     List<string> optionSetQuestions = new List<string>();
@@ -39,6 +40,7 @@ public class DialogueActor : MonoBehaviour {
             List<string> actions = new List<string>();
             List<string> missions = new List<string>();
             List<string> missionCompletes = new List<string>();
+            List<string> nextIds = new List<string>();
 
 
             foreach (XmlNode dialogueOption in dialogueOptions)
@@ -76,11 +78,20 @@ public class DialogueActor : MonoBehaviour {
                 }
                 missionCompletes.Add(missionComplete);
 
+                XmlNodeList dialogueOptionNextIds = dialogueOption.SelectNodes("NextId");
+                string nextId = "";
+                foreach (XmlNode dialogueOptionNextId in dialogueOptionNextIds)
+                {
+                    nextId += dialogueOptionNextId.InnerText;
+                }
+                nextIds.Add(nextId);
+
             }
             dialogueOptionSets.Add(options);
             dialogueActions.Add(actions);
             dialogueMissions.Add(missions);
             dialogueMissionCompletes.Add(missionCompletes);
+            dialogueNextIds.Add(nextIds);
 
 
         }
@@ -108,6 +119,12 @@ public class DialogueActor : MonoBehaviour {
     {
         get { return dialogueMissionCompletes; }
         set { dialogueMissionCompletes = value; }
+    }
+
+    public List<List<string>> NextIds
+    {
+        get { return dialogueNextIds; }
+        set { dialogueNextIds = value; }
     }
 
     public List<string> Questions

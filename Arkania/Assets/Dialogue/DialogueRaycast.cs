@@ -9,6 +9,7 @@ public class DialogueRaycast : MonoBehaviour {
     private bool visible = false;
 
     public DialogueWindow window;
+    public GameObject StoryObject;
 
     float lastPressed;
 
@@ -25,6 +26,15 @@ public class DialogueRaycast : MonoBehaviour {
         int layerMask = 1 << 8;
 
         layerMask = ~layerMask;
+        if (Physics.Raycast(transform.position, fwd, out hit, Mathf.Infinity, layerMask))
+        {
+            DialogueActor actor = hit.transform.gameObject.GetComponent<DialogueActor>();
+            if (actor != null)
+            {
+                StoryObject.SendMessage("ActivateTalk", actor.actorName);
+            }
+            else StoryObject.SendMessage("NoTalk");
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -42,14 +52,9 @@ public class DialogueRaycast : MonoBehaviour {
                             window.OnTalkPrompt();
 
                         }
-
                     }
                 }
             }
-            //pistolSparks.particleEmitter.Emit();
-            //audio.Play();
-
-
         }
     }
 }

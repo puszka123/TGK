@@ -5,10 +5,19 @@
 	Mieszkam niedaleko w lesie.</Question>
 	<Option>
 		<Text>Idź</Text>
-		<Mission>follow_hermer</Mission>
+		<Action>set A</Action>
 	</Option>
 	<Option>
 		<Text>Nie idź</Text>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>A</OptionSetId>
+	<Question>Za mną!</Question>
+	<Option>
+		<Text>Zakończ</Text>
+		<Mission>follow_rim</Mission>
+		<NextId>1</NextId>
 	</Option>
   </OptionSet>
   <OptionSet>

@@ -7,6 +7,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class DialogueWindow : MonoBehaviour {
 
     private int cursor = 0;
+    string _nextId = "0";
 
     bool show = false;
     //string[] shown_options;
@@ -27,7 +28,6 @@ public class DialogueWindow : MonoBehaviour {
         
         PlayerController = GameObject.FindObjectOfType<FirstPersonController>();
         Camera = GameObject.FindObjectOfType<ThirdPersonCamera>();
-        Debug.Log(PlayerController.name);
         actor = gameObject.GetComponent<DialogueActor>();
 
 
@@ -93,7 +93,7 @@ public class DialogueWindow : MonoBehaviour {
     {
         if (show == false)
         {
-            current_option_set = actor.getOptionSetById("0");
+            current_option_set = actor.getOptionSetById(_nextId);
             show = true;
             cursor = 0;
             Camera.SetCanMove(false);
@@ -102,8 +102,6 @@ public class DialogueWindow : MonoBehaviour {
         }
         else
         {
-            Debug.Log(cursor);
-            Debug.Log(current_option_set);
             string action = actor.Actions[current_option_set][cursor];
 
             string[] command = action.Split(' ');
@@ -127,6 +125,15 @@ public class DialogueWindow : MonoBehaviour {
                     story.CompleteMission(missionComplete);
                 }
             }
+
+            List<string> nextIdCandidates = actor.NextIds[current_option_set];
+            Debug.Log(current_option_set + " " + nextIdCandidates.Count);
+            foreach(string nextid in nextIdCandidates)
+                if (!String.IsNullOrEmpty(nextid))
+                {
+                    _nextId = nextid;
+                    break;
+                }
 
             if (command.Length > 1 && command[0].Equals("set"))
             {

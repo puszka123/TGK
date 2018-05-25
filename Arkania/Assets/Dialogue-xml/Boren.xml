@@ -21,6 +21,7 @@
 	</Option>
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
+		<NextId>0</NextId>
 	</Option>
   </OptionSet>
   <OptionSet>
@@ -32,6 +33,7 @@
 	</Option>
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
+		<NextId>0</NextId>
 	</Option>
   </OptionSet>
   <OptionSet>
@@ -131,6 +133,13 @@
 		<MissionComplete>find_children</MissionComplete>
 		<MissionComplete>find_moner</MissionComplete>
 		<Mission>talk_to_moner</Mission>
+	</Option>
+  </OptionSet>
+  <OptionSet>
+	<OptionSetId>NoTalk</OptionSetId>
+	<Question></Question>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
 	</Option>
   </OptionSet>
 </Dialogue>
