@@ -40,7 +40,11 @@ public class StoryObject : MonoBehaviour {
         Debug.Log("adding mission " + mission);
 
         //if both are true then activate Rim
-        if (mission == "find_gold") _activateRimConditions[0] = true;
+        if (mission == "find_gold")
+        {
+            _activateRimConditions[0] = true;
+
+        }
         if (mission == "find_children") _activateRimConditions[1] = true;
         if (mission == "find_moner") ActiveOthers();
         if (mission == "follow_rim") ActivateRimPart2();

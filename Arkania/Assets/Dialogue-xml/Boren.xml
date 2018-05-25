@@ -42,7 +42,7 @@
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
 		<Mission>find_children</Mission>
-		<NextId>1LB</NextId>
+		<NextId>2LB</NextId>
 	</Option>
   </OptionSet>
   <!-- Odpala się po rozmowie z Hermerem-->
@@ -111,7 +111,12 @@
 	<Question>Znalazłaś je?</Question>
 	<Option>
 		<Text>Twoje dzieci.</Text>
+		<Condition>find_children</Condition>
 		<Action>set 2LB1</Action>
+	</Option>
+	<Option>
+		<Text>Zakończ rozmowę.</Text>
+		<NextId>2LB</NextId>
 	</Option>
   </OptionSet>
   <OptionSet>

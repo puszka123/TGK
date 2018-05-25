@@ -13,6 +13,7 @@ public class DialogueActor : MonoBehaviour {
     List<List<string>> dialogueMissions = new List<List<string>>();
     List<List<string>> dialogueMissionCompletes = new List<List<string>>();
     List<List<string>> dialogueNextIds = new List<List<string>>();
+    List<List<string>> dialogueOptionConditions = new List<List<string>>();
 
     List<string> optionSetIds = new List<string>();
     List<string> optionSetQuestions = new List<string>();
@@ -41,6 +42,7 @@ public class DialogueActor : MonoBehaviour {
             List<string> missions = new List<string>();
             List<string> missionCompletes = new List<string>();
             List<string> nextIds = new List<string>();
+            List<string> optionConditions = new List<string>();
 
 
             foreach (XmlNode dialogueOption in dialogueOptions)
@@ -86,12 +88,21 @@ public class DialogueActor : MonoBehaviour {
                 }
                 nextIds.Add(nextId);
 
+                XmlNodeList dialogueOptionConditions = dialogueOption.SelectNodes("Condition");
+                string optionCondition = "";
+                foreach (XmlNode dialogueOptionCondition in dialogueOptionConditions)
+                {
+                    optionCondition += dialogueOptionCondition.InnerText;
+                }
+                optionConditions.Add(optionCondition);
+
             }
             dialogueOptionSets.Add(options);
             dialogueActions.Add(actions);
             dialogueMissions.Add(missions);
             dialogueMissionCompletes.Add(missionCompletes);
             dialogueNextIds.Add(nextIds);
+            dialogueOptionConditions.Add(optionConditions);
 
 
         }
@@ -127,6 +138,12 @@ public class DialogueActor : MonoBehaviour {
         set { dialogueNextIds = value; }
     }
 
+    public List<List<string>> OptionConditions
+    {
+        get { return dialogueOptionConditions; }
+        set { dialogueOptionConditions = value; }
+    }
+
     public List<string> Questions
     {
         get { return optionSetQuestions; }
@@ -144,6 +161,5 @@ public class DialogueActor : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+    }
 }
