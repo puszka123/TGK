@@ -45,6 +45,7 @@
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
 		<Mission>rim_find_gold</Mission>
+		<MissionComplete>follow_rim</MissionComplete>
 	</Option>
   </OptionSet>
 </Dialogue>

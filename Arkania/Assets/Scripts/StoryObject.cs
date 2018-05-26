@@ -16,6 +16,8 @@ public class StoryObject : MonoBehaviour {
     public GameObject MinimapCamera;
     GameObject[] others;
 
+    public GameObject[] RimQuestThings;
+
 
     // Use this for initialization
     void Start() {
@@ -25,6 +27,11 @@ public class StoryObject : MonoBehaviour {
         foreach(GameObject go in others)
         {
              go.SetActive(false);
+        }
+
+        foreach (var item in RimQuestThings)
+        {
+            item.SetActive(false);
         }
     }
 
@@ -104,6 +111,11 @@ public class StoryObject : MonoBehaviour {
         Rim.transform.SetPositionAndRotation(RimSecondLocation.transform.position, transform.rotation);
         SendMessage("SetAction", "Podążaj za Rimem");
         Indicator.SendMessage("SetIndicatedLocation", RimSecondLocation);
+        foreach (var item in RimQuestThings)
+        {
+            item.SetActive(true);
+        }
+        Rim.GetComponent<EnemySight>().enabled = true;
     }
 
     void ActiveOthers()

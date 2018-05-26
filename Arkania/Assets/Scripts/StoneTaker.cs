@@ -2,26 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneTaker : MonoBehaviour {
+public class StoneTaker : MonoBehaviour
+{
     public GameObject Player;
 
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject == Player && Input.GetKey(KeyCode.E))
+        if (GameObject.FindGameObjectWithTag("storyobject").GetComponent<StoryObject>().Missions.Contains("rim_find_gold"))
+            if (other.gameObject == Player && Input.GetKey(KeyCode.E))
+            {
+                gameObject.SetActive(false);
+                other.SendMessage("TakeStone");
+            }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == Player)
         {
-            gameObject.SetActive(false);
-            other.SendMessage("TakeStone");
+            gameObject.SendMessage("SetShow", true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == Player)
+        {
+            gameObject.SendMessage("SetShow", false);
         }
     }
 }

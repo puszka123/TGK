@@ -59,6 +59,7 @@ public class Information : MonoBehaviour {
 
     public void SetAction(string message)
     {
+        StopAllCoroutines();
         _noAction = false;
         _actionMessage = message;
     }
