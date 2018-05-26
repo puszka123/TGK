@@ -11,6 +11,7 @@ public class DialogueWindow : MonoBehaviour
     string _nextId = "0";
 
     bool show = false;
+    bool _onlyOneTimeChangeId = true;
     //string[] shown_options;
 
 
@@ -101,7 +102,8 @@ public class DialogueWindow : MonoBehaviour
                     else
                     {
                         //if the condition met add else hide
-                        if(_nextId == "2LB")
+                        //if children's been found then show the option
+                        if (_nextId == "2LB")
                         {
                             if (story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_children")])
                             {
@@ -112,7 +114,59 @@ public class DialogueWindow : MonoBehaviour
                                 options.Add(String.Empty);
                             }
                         }
-                        
+                        //if gold's been found then show the option
+                        if (_nextId == "1LH")
+                        {
+                            if (story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_gold")])
+                            {
+                                options.Add(optionsTmp[i]);
+                            }
+                            else
+                            {
+                                options.Add(String.Empty);
+                            }
+                        }
+                        //Tyrion conditions
+                        if (gameObject.GetComponent<DialogueActor>().actorName == "Tyrion" && _nextId == "0")
+                        {
+
+                            //boren debt
+                            if (story.GetComponent<StoryObject>().Missions.Contains("boren_debt"))
+                            {
+                                if (optionConditions[i] == "boren_debt" && !story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("boren_debt")])
+                                {
+                                    options.Add(optionsTmp[i]);
+                                }
+                                else
+                                {
+                                    options.Add(String.Empty);
+                                }
+                            }
+                            //hermer first talk
+                            else if (story.GetComponent<StoryObject>().Missions.Contains("find_gold"))
+                            {
+                                if (optionConditions[i] == "hermer_first_talk" && !story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_gold")])
+                                {
+                                    options.Add(optionsTmp[i]);
+                                }
+                                else
+                                {
+                                    options.Add(String.Empty);
+                                }
+                            }
+                            //gold's been found -> tell me where is Moner!
+                            else if (story.GetComponent<StoryObject>().Missions.Contains("find_gold"))
+                            {
+                                if (optionConditions[i] == "find_gold" && story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_gold")])
+                                {
+                                    options.Add(optionsTmp[i]);
+                                }
+                                else
+                                {
+                                    options.Add(String.Empty);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -179,6 +233,14 @@ public class DialogueWindow : MonoBehaviour
             if (!String.IsNullOrEmpty(nextid))
             {
                 _nextId = nextid;
+                if (gameObject.GetComponent<DialogueActor>().actorName == "Boren")
+                {
+                    if (_onlyOneTimeChangeId && _nextId != "0")
+                    {
+                        _onlyOneTimeChangeId = false;
+                        GameObject.FindGameObjectWithTag("storyobject").SendMessage("TryToChangeBorenNextId");
+                    }
+                }
             }
 
             if (command.Length > 1 && command[0].Equals("set"))
@@ -198,6 +260,13 @@ public class DialogueWindow : MonoBehaviour
 
 
 
+    }
+
+    public string NextId { get { return _nextId; } }
+
+    public void ChangeNextId(string nextId)
+    {
+        _nextId = nextId;
     }
 
 }

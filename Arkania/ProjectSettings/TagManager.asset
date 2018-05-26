@@ -12,6 +12,7 @@ TagManager:
   - sun
   - MissionStone
   - actor
+  - storyobject
   layers:
   - Default
   - TransparentFX

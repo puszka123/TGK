@@ -56,7 +56,7 @@
 	<Option>
 		<Text>Tak, Rim ją ukradł.</Text>
 		<Action>set 1LH1</Action>
-		<Condition>find_gold_complete</Condition>
+		<Condition>find_gold</Condition>
 	</Option>
 	<Option>
 		<Text>Nie.</Text>

@@ -5,7 +5,6 @@
 	<Option>
 		<Text>Szukam Monera. Wiesz gdzie może być?</Text>
 		<Action>set 1</Action>
-		<Condition>first_talk</Condition>
 	</Option>
 	<Option>
 		<Text>Spłacę dług Borena.</Text>

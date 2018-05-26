@@ -150,6 +150,7 @@ public class DialogueActor : MonoBehaviour {
         set { optionSetQuestions = value; }
     }
 
+
     public int getOptionSetById(string id)
     {
         for(int i = 0; i < optionSetIds.Count; i++)

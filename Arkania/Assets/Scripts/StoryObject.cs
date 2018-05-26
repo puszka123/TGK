@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class StoryObject : MonoBehaviour {
 
@@ -48,6 +49,7 @@ public class StoryObject : MonoBehaviour {
         if (mission == "find_children") _activateRimConditions[1] = true;
         if (mission == "find_moner") ActiveOthers();
         if (mission == "follow_rim") ActivateRimPart2();
+        if (mission == "find_gold") ChangeBorenNextId();
 
         for (int i = 0; i < missions.Count; i++)
         {
@@ -89,7 +91,7 @@ public class StoryObject : MonoBehaviour {
     IEnumerator ActivateRim()
     {
         _activateRimConditions[0] = _activateRimConditions[1] = false;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         Rim.transform.SetPositionAndRotation(RimFirstLocation.transform.position, transform.rotation);
         Rim.SendMessage("RimScream");
         SendMessage("SetAction", "Sprawdź co się stało!");
@@ -109,6 +111,29 @@ public class StoryObject : MonoBehaviour {
         foreach (GameObject go in others)
         {
             if (go != gameObject) go.SetActive(true);
+        }
+    }
+
+    void ChangeBorenNextId()
+    {
+        GameObject boren = others.Select(e => e).Where(e => e.GetComponent<DialogueActor>().actorName == "Boren").ToArray()[0];
+        //if you have already talked to Boren -> change his nextid to 1lb 
+        if (!String.Equals(boren.GetComponent<DialogueWindow>().NextId, "0"))
+        {
+            Debug.Log(boren.GetComponent<DialogueActor>().actorName + " " + boren.GetComponent<DialogueWindow>().NextId);
+            boren.SendMessage("ChangeNextId", "1LB");
+        }
+    }
+
+    public void TryToChangeBorenNextId()
+    {
+        foreach (var mission in missions)
+        {
+            if(String.Equals(mission, "find_gold"))
+            {
+                GameObject boren = others.Select(e => e).Where(e => e.GetComponent<DialogueActor>().actorName == "Boren").ToArray()[0];
+                boren.SendMessage("ChangeNextId", "1LB");
+            }
         }
     }
 }
