@@ -24,6 +24,7 @@ public class KeyController : MonoBehaviour
     {
         if (other.gameObject == Player)
         {
+            GameObject.FindGameObjectWithTag("storyobject").SendMessage("SetAction", "Muszę jakoś odwrócić uwagę Rima...");
             gameObject.SendMessage("SetShow", true);
         }
     }

@@ -159,6 +159,7 @@ public class StoryObject : MonoBehaviour
     void ActivateTime()
     {
         _activateTime = true;
+        gameObject.SendMessage("SetAction", "Sprawdź czy Rim ma złoto");
     }
 
     void ChangeBorenNextId()
