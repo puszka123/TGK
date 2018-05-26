@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class StoryObject : MonoBehaviour {
+public class StoryObject : MonoBehaviour
+{
 
     List<string> missions;
     List<bool> missionStatuses;
@@ -15,18 +16,21 @@ public class StoryObject : MonoBehaviour {
     public GameObject Indicator;
     public GameObject MinimapCamera;
     GameObject[] others;
+    float _timeToFindGold = 60f;
+    bool _activateTime = false;
 
     public GameObject[] RimQuestThings;
 
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         others = GameObject.FindGameObjectsWithTag("actor");
         missions = new List<string>();
         missionStatuses = new List<bool>();
-        foreach(GameObject go in others)
+        foreach (GameObject go in others)
         {
-             go.SetActive(false);
+            go.SetActive(false);
         }
 
         foreach (var item in RimQuestThings)
@@ -35,8 +39,28 @@ public class StoryObject : MonoBehaviour {
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (_activateTime)
+        {
+            _timeToFindGold -= Time.fixedDeltaTime;
+            if (_timeToFindGold <= 0)
+            {
+                foreach (var item in RimQuestThings)
+                {
+                    item.SetActive(false);
+                }
+                GameObject.FindGameObjectWithTag("storyobject").SendMessage("SetAction", "Czas upłynał! Nie udało sie wykonać misji!");
+                _activateTime = false;
+                GameObject.FindGameObjectWithTag("storyobject").SendMessage("DisableTime");
+            }
+            else GameObject.FindGameObjectWithTag("storyobject").SendMessage("ShowTimeElapsed", _timeToFindGold);
+        }
+    }
+
     // Update is called once per frame
-    void OnGUI() {
+    void OnGUI()
+    {
         for (int i = 0; i < missions.Count; i++)
         {
             GUI.Label(new Rect(10, 10 + 30 * i, 300, 300), missions[i] + " " + missionStatuses[i]);
@@ -44,9 +68,10 @@ public class StoryObject : MonoBehaviour {
         }
     }
 
-    public void AddMission(string mission) {
+    public void AddMission(string mission)
+    {
         Debug.Log("adding mission " + mission);
-
+        if (missions.Contains(mission)) return;
         //if both are true then activate Rim
         if (mission == "find_gold")
         {
@@ -57,6 +82,7 @@ public class StoryObject : MonoBehaviour {
         if (mission == "find_moner") ActiveOthers();
         if (mission == "follow_rim") ActivateRimPart2();
         if (mission == "find_gold") ChangeBorenNextId();
+        if (mission == "rim_find_gold") ActivateTime();
 
         for (int i = 0; i < missions.Count; i++)
         {
@@ -64,7 +90,7 @@ public class StoryObject : MonoBehaviour {
         }
         missions.Add(mission);
         missionStatuses.Add(false);
-        
+
         //start rim part
         if (_activateRimConditions[0] && _activateRimConditions[1]) StartCoroutine(ActivateRim());
     }
@@ -84,10 +110,14 @@ public class StoryObject : MonoBehaviour {
     public void CompleteMission(string missionComplete)
     {
         Debug.Log("completing mission " + missionComplete);
-
+        if (missionComplete == "rim_find_gold")
+        {
+            _activateTime = false;
+            GameObject.FindGameObjectWithTag("storyobject").SendMessage("DisableTime");
+        }
         for (int i = 0; i < missions.Count; i++)
         {
-            if(missionComplete == (string)missions[i])
+            if (missionComplete == (string)missions[i])
             {
                 missionStatuses[i] = true;
                 break;
@@ -126,6 +156,11 @@ public class StoryObject : MonoBehaviour {
         }
     }
 
+    void ActivateTime()
+    {
+        _activateTime = true;
+    }
+
     void ChangeBorenNextId()
     {
         GameObject boren = others.Select(e => e).Where(e => e.GetComponent<DialogueActor>().actorName == "Boren").ToArray()[0];
@@ -141,7 +176,7 @@ public class StoryObject : MonoBehaviour {
     {
         foreach (var mission in missions)
         {
-            if(String.Equals(mission, "find_gold"))
+            if (String.Equals(mission, "find_gold"))
             {
                 GameObject boren = others.Select(e => e).Where(e => e.GetComponent<DialogueActor>().actorName == "Boren").ToArray()[0];
                 boren.SendMessage("ChangeNextId", "1LB");

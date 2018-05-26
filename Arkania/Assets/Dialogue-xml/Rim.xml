@@ -39,9 +39,8 @@
   </OptionSet>
 +<OptionSet>
 	<OptionSetId>3</OptionSetId>
-	<Question>Spytaj Tyrion. On zna wszystkich. Ja nic nie wiem. 
-	Robi się już późno. Jak chcesz możesz zostać na noc. 
-	Na górze znajdziesz sobie miejsce.</Question>
+	<Question>Spytaj Tyriona. On zna wszystkich. Ja nic nie wiem. 
+	Robi się już późno. To ja już będę wracał. Powodzenia z szukaniem tego, no..., Monera.</Question>
 	<Option>
 		<Text>Zakończ rozmowę.</Text>
 		<Mission>rim_find_gold</Mission>
