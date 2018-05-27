@@ -18,6 +18,7 @@ public class StoryObject : MonoBehaviour
     GameObject[] others;
     float _timeToFindGold = 60f;
     bool _activateTime = false;
+    public GameObject RimZombie;
 
     public GameObject[] RimQuestThings;
 
@@ -25,6 +26,7 @@ public class StoryObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        RimZombie.SetActive(false);
         others = GameObject.FindGameObjectsWithTag("actor");
         missions = new List<string>();
         missionStatuses = new List<bool>();
@@ -130,6 +132,7 @@ public class StoryObject : MonoBehaviour
         _activateRimConditions[0] = _activateRimConditions[1] = false;
         yield return new WaitForSeconds(2);
         Rim.transform.SetPositionAndRotation(RimFirstLocation.transform.position, transform.rotation);
+        RimZombie.SetActive(true);
         Rim.SendMessage("RimScream");
         SendMessage("SetAction", "Sprawdź co się stało!");
         Indicator.SendMessage("SetIndicatedLocation", RimFirstLocation);
