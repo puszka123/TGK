@@ -24,6 +24,8 @@ public class StoryObject : MonoBehaviour
     public GameObject Player;
     public GameObject[] kids;
     int kidCount = 0;
+    public GameObject LastLocation;
+    public GameObject DownStairs;
 
 
     // Use this for initialization
@@ -47,6 +49,7 @@ public class StoryObject : MonoBehaviour
         {
             item.SetActive(false);
         }
+        DownStairs.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -184,6 +187,8 @@ public class StoryObject : MonoBehaviour
     void ActivateLastLocation()
     {
         FogZombies.SetActive(true);
+        DownStairs.SetActive(true);
+        Indicator.SendMessage("SetIndicatedLocation", LastLocation);
     }
 
     void ChangeBorenNextId()
