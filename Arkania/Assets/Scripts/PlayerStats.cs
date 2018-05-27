@@ -37,7 +37,10 @@ public class PlayerStats : MonoBehaviour
     bool isSword = false;
     float lastPressed;
     public GameObject Sword;
-
+    Animator animator;
+    public GameObject animation;
+    public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
+    bool isWalking;
 
     void Awake()
     {
@@ -71,6 +74,7 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
+        animator = animation.GetComponent<Animator>();
         Rect currentRes = new Rect(-Screen.width * 0.5f,
                                    -Screen.height * 0.5f,
                                    Screen.width,
@@ -99,10 +103,12 @@ public class PlayerStats : MonoBehaviour
 
         fwd = transform.TransformDirection(Vector3.forward);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && isSword)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isSword && !isWalking)
         {
             if (time <= 0f)
             {
+                animator.SetTrigger("attack");
+                StartCoroutine(StopAttack());
                 time = AttackDelay;
                 if (Physics.Raycast(transform.position, fwd, out hit, AttackDistance))
                 {
@@ -123,6 +129,12 @@ public class PlayerStats : MonoBehaviour
 
         time -= Time.deltaTime;
         lastPressed -= Time.deltaTime;
+    }
+
+    IEnumerator StopAttack()
+    {
+        yield return new WaitForSeconds(0.1f);
+        animator.SetTrigger("stopAttack");
     }
 
     void FixedUpdate()
@@ -167,6 +179,11 @@ public class PlayerStats : MonoBehaviour
     {
         currentStat += maxStat * 0.01f;
         Mathf.Clamp(currentStat, 0, maxStat);
+    }
+
+    public void IsWalking(bool value)
+    {
+        isWalking = value;
     }
 
 }

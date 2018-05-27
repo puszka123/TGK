@@ -13,7 +13,8 @@ public class ZombieAI : MonoBehaviour
     private AnimatorStateInfo stateInfo;
     NavMeshAgent agent;
 
-    public float walkSpeed = 1.0f;
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
     public float attackDistance = 10.0f;
     public float attackDamage = 10.0f;
     public float attackDelay = 5.0f;
@@ -26,6 +27,7 @@ public class ZombieAI : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = walkSpeed;
         currentState = "";
         attackDistance = 3.2f;
         attackDelay = 0.5f;
@@ -40,6 +42,7 @@ public class ZombieAI : MonoBehaviour
             float distance = Vector3.Distance(transform.position, Player.transform.position);
             if (distance > attackDistance)
             {
+                agent.speed = runSpeed;
                 agent.isStopped = false;
                 AnimationSet("run");
                 agent.SetDestination(Player.transform.position);
@@ -109,5 +112,15 @@ public class ZombieAI : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("other");
+        if (other.gameObject == Player)
+        {
+            Debug.Log("activated");
+            agent.SetDestination(Player.transform.position);
+        }
     }
 }

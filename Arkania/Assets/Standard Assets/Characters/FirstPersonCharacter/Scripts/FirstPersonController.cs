@@ -53,6 +53,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_CanMove = true;
         private bool m_CanMoveCamera = true;
 
+
         // Use this for initialization
         private void Start()
         {
@@ -108,16 +109,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 if (!isWalking)
                 {
+                    animator.SetTrigger("stopAttack");
                     animator.SetTrigger("startedWalking");
                     isWalking = true;
+                    gameObject.SendMessage("IsWalking", isWalking);
                 }
             }
             else
             {
                 if (isWalking)
                 {
+                    animator.SetTrigger("stopAttack");
                     animator.SetTrigger("stoppedWalking");
                     isWalking = false;
+                    gameObject.SendMessage("IsWalking", isWalking);
                 }
             }
         }
