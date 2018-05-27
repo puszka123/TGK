@@ -22,6 +22,8 @@ public class StoryObject : MonoBehaviour
     public GameObject FogZombies;
     public GameObject[] RimQuestThings;
     public GameObject Player;
+    public GameObject[] kids;
+    int kidCount = 0;
 
 
     // Use this for initialization
@@ -35,6 +37,10 @@ public class StoryObject : MonoBehaviour
         foreach (GameObject go in others)
         {
             go.SetActive(false);
+        }
+        foreach (var item in kids)
+        {
+            item.SetActive(false);
         }
 
         foreach (var item in RimQuestThings)
@@ -82,7 +88,14 @@ public class StoryObject : MonoBehaviour
             _activateRimConditions[0] = true;
 
         }
-        if (mission == "find_children") _activateRimConditions[1] = true;
+        if (mission == "find_children")
+        {
+            _activateRimConditions[1] = true;
+            foreach (var item in kids)
+            {
+                item.SetActive(true);
+            }
+        }
         if (mission == "find_moner") ActiveOthers();
         if (mission == "follow_rim") ActivateRimPart2();
         if (mission == "find_gold") ChangeBorenNextId();
@@ -97,7 +110,7 @@ public class StoryObject : MonoBehaviour
         missionStatuses.Add(false);
 
         //start rim part
-        if (_activateRimConditions[0] && _activateRimConditions[1]) StartCoroutine(ActivateRim());
+        if (_activateRimConditions[0]) StartCoroutine(ActivateRim());
     }
 
     public List<String> Missions
@@ -205,5 +218,14 @@ public class StoryObject : MonoBehaviour
     void ShowEnd()
     {
 
+    }
+
+    public void KidFound()
+    {
+        ++kidCount;
+        if(kidCount == 3)
+        {
+            CompleteMission("find_children");
+        }
     }
 }
