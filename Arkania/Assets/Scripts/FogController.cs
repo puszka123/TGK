@@ -27,6 +27,11 @@ public class FogController : MonoBehaviour {
             {
                 light.intensity = 1f;
             }
+            else
+            {
+                Debug.Log("change light");
+                light.intensity = 0f;
+            }
         }
     }
 }

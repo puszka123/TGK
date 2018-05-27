@@ -106,10 +106,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 988
-  m_MinSize: {x: 681, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 55
+  controlID: 11
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 56
+  controlID: 12
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 57
+  controlID: 13
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -256,8 +256,8 @@ MonoBehaviour:
     y: 0
     width: 277
     height: 988
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -368,23 +368,23 @@ MonoBehaviour:
     height: 696
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e2720100
+    m_SelectedIDs: 78010000
     m_LastClickedID: 0
-    m_ExpandedIDs: 18fcffff00000000
+    m_ExpandedIDs: 18fcffff0000000076350000ec3c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: villager_zombie
-      m_OriginalName: villager_zombie
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -2718
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
@@ -425,9 +425,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 808.8217, y: 96.97808, z: 282.36978}
+    m_Target: {x: 285.32944, y: 123.99052, z: 321.11664}
     speed: 2
-    m_Value: {x: 808.8217, y: 96.97808, z: 282.36978}
+    m_Value: {x: 285.32944, y: 123.99052, z: 321.11664}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -450,13 +450,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.01174275, y: 0.98086315, z: -0.18398541, w: 0.062602304}
+    m_Target: {x: -0.04010162, y: 0.95372665, z: -0.2587435, w: -0.14781499}
     speed: 2
-    m_Value: {x: 0.01174275, y: 0.98086315, z: -0.18398541, w: 0.062602304}
+    m_Value: {x: -0.04010162, y: 0.95372665, z: -0.2587435, w: -0.14781499}
   m_Size:
-    m_Target: 40.10685
+    m_Target: 22.755005
     speed: 2
-    m_Value: 40.10685
+    m_Value: 22.755005
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -526,7 +526,7 @@ MonoBehaviour:
     - {fileID: 1107207128938713010, guid: 237891270f5ec6b4e80a57bb0d648b57, type: 2}
     m_ValueSerializationHelper:
     - {x: 695.4, y: 299.19995}
-    - {x: 792.4, y: 397.6}
+    - {x: 580.80005, y: 154.20001}
     - {x: 580.80005, y: 154.20001}
   m_PreviewAnimator: {fileID: 0}
   m_AnimatorController: {fileID: 0}
@@ -579,19 +579,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Miscellaneous
+    - Assets/DungeonCharacters/zombie
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Miscellaneous
+  - Assets/DungeonCharacters/zombie
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Professional\Documents\TGK\Arkania
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 331}
-    m_SelectedIDs: be2d0000
-    m_LastClickedID: 11710
-    m_ExpandedIDs: 00000000262700008e290000882a0000b42a0000c62a0000c82b00005c2f0000f42f000060300000c630000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 279}
+    m_SelectedIDs: d02b0000
+    m_LastClickedID: 11216
+    m_ExpandedIDs: 0000000028270000902900008e2a0000ba2a0000cc2a0000d02b0000682f0000003000006c300000d230000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -619,7 +619,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000262700008e290000882a0000b42a0000c62a0000c82b00005c2f0000f42f000060300000c6300000
+    m_ExpandedIDs: 0000000028270000902900008e2a0000ba2a0000cc2a0000d02b0000682f0000003000006c300000d2300000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

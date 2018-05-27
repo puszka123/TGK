@@ -20,16 +20,20 @@ public class ZombieAI : MonoBehaviour
     public float attackDelay = 5.0f;
     public float hp = 20.0f;
     bool alive = true;
-
+    GameObject[] locations;
+    Vector3 _goal;
+    public AudioSource audio;
 
     // Use this for initialization
     void Start()
     {
+        _goal = transform.position;
+        locations = GameObject.FindGameObjectsWithTag("lastpoints");
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = walkSpeed;
         currentState = "";
-        attackDistance = 3.2f;
+        attackDistance = 3.5f;
         attackDelay = 0.5f;
     }
 
@@ -39,6 +43,7 @@ public class ZombieAI : MonoBehaviour
         if (!alive) return;
         if (GetComponent<EnemySight>().CanSee)
         {
+            if(!audio.isPlaying) audio.Play();
             float distance = Vector3.Distance(transform.position, Player.transform.position);
             if (distance > attackDistance)
             {
@@ -59,6 +64,23 @@ public class ZombieAI : MonoBehaviour
             }
             if (timer > 0) timer -= Time.deltaTime;
         }
+        else if(tag == "fogzombie")
+        {
+            audio.Stop();
+            if (Vector3.Distance(_goal, transform.position) < 10f)
+            Patrol();
+        }
+    }
+
+    void Patrol()
+    {
+        //first choose a location
+        GameObject location = locations[Random.RandomGen.Next(locations.Length)];
+        agent.speed = walkSpeed;
+        agent.isStopped = false;
+        AnimationSet("run");
+        agent.SetDestination(location.transform.position);
+        _goal = location.transform.position;
     }
 
     private void AnimationSet(string animationToPlay)
@@ -98,7 +120,7 @@ public class ZombieAI : MonoBehaviour
 
     public void TakeHit(float damage)
     {
-        Debug.Log("zombie hit " + damage);
+        //Debug.Log("zombie hit " + damage);
         hp -= damage;
         if(hp <= 0)
         {
@@ -116,10 +138,8 @@ public class ZombieAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("other");
         if (other.gameObject == Player)
         {
-            Debug.Log("activated");
             agent.SetDestination(Player.transform.position);
         }
     }

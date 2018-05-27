@@ -18,7 +18,7 @@ public class EnemySight : MonoBehaviour
         Vector3 targetDir = playerTransform.position - transform.position;
         float angle = Vector3.Angle(targetDir, transform.forward);
 
-        if (gameObject.tag != "zombie")
+        if (gameObject.tag != "zombie" && gameObject.tag !="fogzombie")
         {
             if (angle <= 60.0f)
             {
@@ -28,7 +28,7 @@ public class EnemySight : MonoBehaviour
         }
         else
         {
-            if (angle <= 60.0f && Vector3.Distance(player.transform.position, transform.position) < 30f)
+            if (angle <= 80.0f && Vector3.Distance(player.transform.position, transform.position) < 20f)
             {
                 CanSee = true;
             }

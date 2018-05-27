@@ -41,6 +41,8 @@ public class PlayerStats : MonoBehaviour
     public GameObject animation;
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
     bool isWalking;
+    float originalSpeed;
+    float speedTimer;
 
     void Awake()
     {
@@ -79,10 +81,27 @@ public class PlayerStats : MonoBehaviour
                                    -Screen.height * 0.5f,
                                    Screen.width,
                                    Screen.height);
+        originalSpeed = walkSpeed;
+        speedTimer = 0.5f;
+        fpsC.SendMessage("ChangeSpeed", walkSpeed);
+        fpsC.SendMessage("ChangeRunSpeed", runSpeed);
     }
 
     void Update()
     {
+        if(walkSpeed < originalSpeed)
+        {
+            if (speedTimer <= 0f)
+            {
+                walkSpeed++;
+                runSpeed++;
+                speedTimer = 0.5f;
+                fpsC.SendMessage("ChangeSpeed", walkSpeed);
+                fpsC.SendMessage("ChangeRunSpeed", runSpeed);
+            }
+            speedTimer -= Time.deltaTime;
+        }
+
         if (canHeal > 0.0f)
         {
             canHeal -= Time.deltaTime;
@@ -166,7 +185,15 @@ public class PlayerStats : MonoBehaviour
         //Destroy(Instantiate(hitTexture), 0.15f);
 
         currentHealth -= damage;
-
+        walkSpeed = 3.5f;
+        runSpeed = 5.5f;
+        if(currentHealth <=0f)
+        {
+            SendMessage("DieNow");
+            fpsC.CanMove = false;
+        }
+        fpsC.SendMessage("ChangeSpeed", walkSpeed);
+        fpsC.SendMessage("ChangeRunSpeed", runSpeed);
         if (currentHealth < maxHealth)
         {
             canHeal = 10.0f;

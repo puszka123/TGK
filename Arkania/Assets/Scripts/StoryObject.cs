@@ -19,13 +19,15 @@ public class StoryObject : MonoBehaviour
     float _timeToFindGold = 60f;
     bool _activateTime = false;
     public GameObject RimZombie;
-
+    public GameObject FogZombies;
     public GameObject[] RimQuestThings;
+    public GameObject Player;
 
 
     // Use this for initialization
     void Start()
     {
+       // FogZombies.SetActive(false);
         RimZombie.SetActive(false);
         others = GameObject.FindGameObjectsWithTag("actor");
         missions = new List<string>();
@@ -85,6 +87,7 @@ public class StoryObject : MonoBehaviour
         if (mission == "follow_rim") ActivateRimPart2();
         if (mission == "find_gold") ChangeBorenNextId();
         if (mission == "rim_find_gold") ActivateTime();
+        if (mission == "talk_to_moner") ActivateLastLocation();
 
         for (int i = 0; i < missions.Count; i++)
         {
@@ -165,6 +168,11 @@ public class StoryObject : MonoBehaviour
         gameObject.SendMessage("SetAction", "Sprawdź czy Rim ma złoto");
     }
 
+    void ActivateLastLocation()
+    {
+        FogZombies.SetActive(true);
+    }
+
     void ChangeBorenNextId()
     {
         GameObject boren = others.Select(e => e).Where(e => e.GetComponent<DialogueActor>().actorName == "Boren").ToArray()[0];
@@ -186,5 +194,16 @@ public class StoryObject : MonoBehaviour
                 boren.SendMessage("ChangeNextId", "1LB");
             }
         }
+    }
+
+    public void EndTheGame()
+    {
+        Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().CanMove = false;
+        ShowEnd();
+    }
+
+    void ShowEnd()
+    {
+
     }
 }

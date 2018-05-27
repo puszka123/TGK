@@ -332,5 +332,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+        public void ChangeSpeed(float value)
+        {
+            m_WalkSpeed = value;
+        }
+
+        public void ChangeRunSpeed(float value)
+        {
+            m_RunSpeed = value;
+        }
+
+        public void DieNow()
+        {
+            animator.SetTrigger("die");
+        }
     }
 }
