@@ -93,29 +93,31 @@ public class DialogueWindow : MonoBehaviour
 
             for (int i = 0; i < optionsTmp.Count; i++)
             {
-                if (optionConditions.Count > i)
+                //if (optionConditions.Count > i)
+                //{
+                if (String.IsNullOrEmpty(optionConditions[i]))
                 {
-                    if (String.IsNullOrEmpty(optionConditions[i]))
+                    options.Add(optionsTmp[i]);
+                }
+                else
+                {
+                    //if the condition met add else hide
+                    //if children's been found then show the option
+                    if (_nextId == "2LB")
                     {
-                        options.Add(optionsTmp[i]);
-                    }
-                    else
-                    {
-                        //if the condition met add else hide
-                        //if children's been found then show the option
-                        if (_nextId == "2LB")
+                        if (story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_children")])
                         {
-                            if (story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_children")])
-                            {
-                                options.Add(optionsTmp[i]);
-                            }
-                            else
-                            {
-                                options.Add(String.Empty);
-                            }
+                            options.Add(optionsTmp[i]);
                         }
-                        //if gold's been found then show the option
-                        if (_nextId == "1LH")
+                        else
+                        {
+                            options.Add(String.Empty);
+                        }
+                    }
+                    //if gold's been found then show the option
+                    if (_nextId == "1LH")
+                    {
+                        if (story.GetComponent<StoryObject>().Missions.Contains("rim_find_gold"))
                         {
                             if (story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("rim_find_gold")])
                             {
@@ -126,56 +128,61 @@ public class DialogueWindow : MonoBehaviour
                                 options.Add(String.Empty);
                             }
                         }
-                        //Tyrion conditions
-                        if (gameObject.GetComponent<DialogueActor>().actorName == "Tyrion" && _nextId == "0")
+                        else
                         {
-                            Debug.Log("this fucking unity can't compile this shit");
-                            //boren debt
-                            if (optionConditions[i] == "boren_debt")
-                            {
-                                if (story.GetComponent<StoryObject>().Missions.Contains("boren_debt"))
-                                {
-                                    if (!story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("boren_debt")])
-                                    {
-                                        options.Add(optionsTmp[i]);
-                                    }
-                                    else options.Add(String.Empty);
-                                }
-                                else options.Add(String.Empty);
-                            }
-
-
-                            //hermer first talk
-                            if (optionConditions[i] == "hermer_first_talk")
-                            {
-                                if (story.GetComponent<StoryObject>().Missions.Contains("find_gold"))
-                                {
-                                    if (!story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_gold")])
-                                    {
-                                        options.Add(optionsTmp[i]);
-                                    }
-                                    else options.Add(String.Empty);
-                                }
-                                else options.Add(String.Empty);
-                            }
-
-                            //gold's been found -> tell me where is Moner!
-                            if (optionConditions[i] == "find_gold")
-                            {
-                                if (story.GetComponent<StoryObject>().Missions.Contains("find_gold"))
-                                {
-                                    if (story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_gold")])
-                                    {
-                                        options.Add(optionsTmp[i]);
-                                    }
-                                    else options.Add(String.Empty);
-                                }
-                                else options.Add(String.Empty);
-                            }
-
+                            options.Add(String.Empty);
                         }
                     }
+                    //Tyrion conditions
+                    if (gameObject.GetComponent<DialogueActor>().actorName == "Tyrion" && _nextId == "0")
+                    {
+                        Debug.Log("this fucking unity can't compile this shit");
+                        //boren debt
+                        if (optionConditions[i] == "boren_debt")
+                        {
+                            if (story.GetComponent<StoryObject>().Missions.Contains("boren_debt"))
+                            {
+                                if (!story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("boren_debt")])
+                                {
+                                    options.Add(optionsTmp[i]);
+                                }
+                                else options.Add(String.Empty);
+                            }
+                            else options.Add(String.Empty);
+                        }
+
+
+                        //hermer first talk
+                        if (optionConditions[i] == "hermer_first_talk")
+                        {
+                            if (story.GetComponent<StoryObject>().Missions.Contains("find_gold"))
+                            {
+                                if (!story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_gold")])
+                                {
+                                    options.Add(optionsTmp[i]);
+                                }
+                                else options.Add(String.Empty);
+                            }
+                            else options.Add(String.Empty);
+                        }
+
+                        //gold's been found -> tell me where is Moner!
+                        if (optionConditions[i] == "find_gold")
+                        {
+                            if (story.GetComponent<StoryObject>().Missions.Contains("find_gold"))
+                            {
+                                if (story.GetComponent<StoryObject>().MissionStatuses[story.GetComponent<StoryObject>().Missions.IndexOf("find_gold")])
+                                {
+                                    options.Add(optionsTmp[i]);
+                                }
+                                else options.Add(String.Empty);
+                            }
+                            else options.Add(String.Empty);
+                        }
+
+                    }
                 }
+                //}
             }
 
 

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Information : MonoBehaviour {
+public class Information : MonoBehaviour
+{
 
     bool _canTalk = false;
     bool _noAction = true;
@@ -14,12 +15,14 @@ public class Information : MonoBehaviour {
     bool _showTime = false;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
     }
 
@@ -28,25 +31,46 @@ public class Information : MonoBehaviour {
         if (_canTalk && _noAction)
         {
             guiStyle.fontSize = 20;
-            guiStyle.normal.textColor = Color.red;
+            //guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
-            GUI.Label(new Rect(Screen.width / 2 - 50, 10, 100, 100), "Rozmawiaj z " + _npcName, guiStyle);
+            var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            texture.SetPixel(0, 0, new Color(0f, 0f, 0f, 0.7f));
+            texture.Apply();
+            string text = "Rozmawiaj z " + _npcName;
+            GUIContent content = new GUIContent(text);
+            Vector2 size = guiStyle.CalcSize(content);
+            guiStyle.normal = new GUIStyleState { textColor = Color.white, background = texture };
+            GUI.Label(new Rect(Screen.width / 2 - 50, 10, size.x, size.y), content, guiStyle);
         }
-        if(!_noAction)
+        if (!_noAction)
         {
             guiStyle.fontSize = 20;
             guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
-            GUI.Label(new Rect(Screen.width / 2 - 50, 10, 100, 100), _actionMessage, guiStyle);
+            var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            texture.SetPixel(0, 0, new Color(0f, 0f, 0f, 0.7f));
+            texture.Apply();
+            GUIContent content = new GUIContent(_actionMessage);
+            Vector2 size = guiStyle.CalcSize(content);
+            guiStyle.normal = new GUIStyleState { textColor = Color.white, background = texture };
+            GUI.Label(new Rect(Screen.width / 2 - 50, 10, size.x, size.y), content, guiStyle);
             StartCoroutine(DisableActionMessage());
         }
-        if(_showTime)
+        if (_showTime)
         {
             guiStyle.fontSize = 20;
             guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
-            GUI.Label(new Rect(Screen.width / 2 - 50, 80, 100, 100), "Znajdź złoto!", guiStyle);
-            GUI.Label(new Rect(Screen.width / 2 - 50, 100, 100, 100), _elapsedTime.ToString("0.00"), guiStyle);
+            var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            texture.SetPixel(0, 0, new Color(0f, 0f, 0f, 0.7f));
+            texture.Apply();
+            GUIContent content = new GUIContent("Znajdź złoto!");
+            GUIContent content1 = new GUIContent(_elapsedTime.ToString("0.00"));
+            Vector2 size = guiStyle.CalcSize(content);
+            guiStyle.normal = new GUIStyleState { textColor = Color.white, background = texture };
+            Vector2 size1 = guiStyle.CalcSize(content1);
+            GUI.Label(new Rect(Screen.width / 2 - 50, 80, size.x, size.y), content, guiStyle);
+            GUI.Label(new Rect(Screen.width / 2 - 50, 100, size1.x, size1.y), content1, guiStyle);
         }
     }
 
