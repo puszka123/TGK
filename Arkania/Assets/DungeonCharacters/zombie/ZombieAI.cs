@@ -18,6 +18,7 @@ public class ZombieAI : MonoBehaviour
     public float attackDamage = 10.0f;
     public float attackDelay = 5.0f;
     public float hp = 20.0f;
+    bool alive = true;
 
 
     // Use this for initialization
@@ -27,12 +28,13 @@ public class ZombieAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         currentState = "";
         attackDistance = 3.2f;
-        attackDelay = 1f;
+        attackDelay = 0.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!alive) return;
         if (GetComponent<EnemySight>().CanSee)
         {
             float distance = Vector3.Distance(transform.position, Player.transform.position);
@@ -48,7 +50,7 @@ public class ZombieAI : MonoBehaviour
                 if (timer <= 0)
                 {
                     AnimationSet("attack");
-                    //Player.SendMessage("takeHit", attackDamage);
+                    Player.SendMessage("takeHit", attackDamage);
                     timer = attackDelay;
                 }
             }
@@ -71,6 +73,10 @@ public class ZombieAI : MonoBehaviour
             */
             if (currentState == "attack" && previousState != "attack") animator.SetBool("runToIdle", true);
             if (currentState == "run" && previousState != "run") animator.SetBool("attackToIdle", true);
+            if(animationToPlay == "die")
+            {
+                animator.SetBool("attackToIdle", true);
+            }
             string state = "idleTo" + currentState.Substring(0, 1).ToUpper() + currentState.Substring(1);
             animator.SetBool(state, true);
             previousState = currentState;
@@ -85,5 +91,23 @@ public class ZombieAI : MonoBehaviour
         animator.SetBool("idleToDie", false);
         animator.SetBool("runToIdle", false);
         animator.SetBool("attackToIdle", false);
+    }
+
+    public void TakeHit(float damage)
+    {
+        Debug.Log("zombie hit " + damage);
+        hp -= damage;
+        if(hp <= 0)
+        {
+            AnimationSet("die");
+            alive = false;
+            StartCoroutine(Destroy());
+        }
+    }
+
+    IEnumerator Destroy()
+    {
+        yield return new WaitForSeconds(5);
+        gameObject.SetActive(false);
     }
 }

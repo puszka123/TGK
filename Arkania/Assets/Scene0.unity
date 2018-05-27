@@ -12744,6 +12744,10 @@ Transform:
   m_Father: {fileID: 641864017}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &769088244 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100098, guid: 02e60d93bba7d944aba67a79a0f6b242, type: 3}
+  m_PrefabInternal: {fileID: 878160273}
 --- !u!1 &770044937
 GameObject:
   m_ObjectHideFlags: 0
@@ -15163,6 +15167,10 @@ Prefab:
     - target: {fileID: 13700002, guid: 02e60d93bba7d944aba67a79a0f6b242, type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[1]
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 100098, guid: 02e60d93bba7d944aba67a79a0f6b242, type: 3}
+      propertyPath: m_TagString
+      value: sword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02e60d93bba7d944aba67a79a0f6b242, type: 3}
@@ -33630,6 +33638,10 @@ MonoBehaviour:
   staminaTexture: {fileID: 2800000, guid: fede48f3ff39b464a8d323d46bb4eff6, type: 3}
   walkSpeed: 10
   runSpeed: 20
+  AttackDistance: 3.2
+  AttackDelay: 0.5
+  AttackDamage: 10
+  Sword: {fileID: 769088244}
 --- !u!4 &1947778683 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}

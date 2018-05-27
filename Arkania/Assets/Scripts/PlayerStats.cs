@@ -28,6 +28,16 @@ public class PlayerStats : MonoBehaviour
     public float walkSpeed = 10.0f;
     public float runSpeed = 20.0f;
 
+    public float AttackDistance  = 3.2f;
+    public float AttackDelay = 0.5f;
+    public float AttackDamage = 10f;
+    private RaycastHit hit;
+    private Vector3 fwd;
+    private float time = 0f;
+    bool isSword = false;
+    float lastPressed;
+    public GameObject Sword;
+
 
     void Awake()
     {
@@ -69,11 +79,6 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            takeHit(30);
-        }
-
         if (canHeal > 0.0f)
         {
             canHeal -= Time.deltaTime;
@@ -92,6 +97,32 @@ public class PlayerStats : MonoBehaviour
             regenerate(ref currentStamina, maxStamina);
         }
 
+        fwd = transform.TransformDirection(Vector3.forward);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isSword)
+        {
+            if (time <= 0f)
+            {
+                time = AttackDelay;
+                if (Physics.Raycast(transform.position, fwd, out hit, AttackDistance))
+                {
+                    hit.transform.gameObject.SendMessage("TakeHit", AttackDamage);
+                }
+            }
+        }
+
+        if(Input.GetKey(KeyCode.Z))
+        {       
+            if(lastPressed <= 0f)
+            {
+                lastPressed = 0.2f;
+                isSword = !isSword;
+                Sword.SetActive(isSword);
+            }
+        }
+
+        time -= Time.deltaTime;
+        lastPressed -= Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -126,7 +157,7 @@ public class PlayerStats : MonoBehaviour
 
         if (currentHealth < maxHealth)
         {
-            canHeal = 5.0f;
+            canHeal = 10.0f;
         }
 
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
