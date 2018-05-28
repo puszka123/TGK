@@ -149,4 +149,19 @@ public class ZombieAI : MonoBehaviour
             agent.SetDestination(Player.transform.position);
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject == Player && !GetComponent<EnemySight>().CanSee)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(Player.transform.position);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        agent.isStopped = false;
+        agent.SetDestination(Player.transform.position);
+    }
 }
