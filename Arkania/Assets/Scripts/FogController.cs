@@ -26,11 +26,13 @@ public class FogController : MonoBehaviour {
             if (!RenderSettings.fog)
             {
                 light.intensity = 1f;
+                PlayerObject.SendMessage("PlayHorrorMusic", false);
             }
             else
             {
                 Debug.Log("change light");
                 light.intensity = 0f;
+                PlayerObject.SendMessage("PlayHorrorMusic", true);
             }
         }
     }

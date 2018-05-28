@@ -23,6 +23,7 @@ public class ZombieAI : MonoBehaviour
     GameObject[] locations;
     Vector3 _goal;
     public AudioSource audio;
+    bool attack = false;
 
     // Use this for initialization
     void Start()
@@ -55,6 +56,7 @@ public class ZombieAI : MonoBehaviour
             else
             {
                 agent.isStopped = true;
+                attack = true;
                 if (timer <= 0)
                 {
                     AnimationSet("attack");
@@ -66,9 +68,13 @@ public class ZombieAI : MonoBehaviour
         }
         else if(tag == "fogzombie")
         {
+            agent.isStopped = false;
             audio.Stop();
-            if (Vector3.Distance(_goal, transform.position) < 10f)
-            Patrol();
+            if ((Vector3.Distance(_goal, transform.position) < 10f) || attack)
+            {
+                attack = false;
+                Patrol();
+            }
         }
     }
 

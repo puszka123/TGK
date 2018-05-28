@@ -9,13 +9,18 @@ public class PlayerMissionManager : MonoBehaviour
     bool _hasKey = false;
     public GameObject Stone;
     public GameObject Rim;
+    public AudioClip[] horrorMusic;
+    bool playMusic = false;
+    public GameObject AudioObject;
+    AudioSource audioSource;
+    int audioIndex = 0;
 
     public bool HasKey { get { return _hasKey; } }
 
     // Use this for initialization
     void Start()
     {
-
+        audioSource = AudioObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,6 +34,19 @@ public class PlayerMissionManager : MonoBehaviour
                 ThrowStone();
             }
         }
+        if (playMusic)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = horrorMusic[audioIndex++];
+                audioSource.Play();
+                if (audioIndex >= horrorMusic.Length)
+                {
+                    audioIndex = 0;
+                }
+            }
+        }
+        else if (audioSource.isPlaying) audioSource.Stop();
     }
 
     public void TakeStone()
@@ -50,5 +68,10 @@ public class PlayerMissionManager : MonoBehaviour
         Rigidbody clone = Instantiate(Stone.GetComponent<Rigidbody>(), transform.position, transform.rotation) as Rigidbody;
         Rim.SendMessage("LookAtStone", clone);
         clone.AddForce(transform.TransformDirection(Vector3.forward * 1000));
+    }
+
+    public void PlayHorrorMusic(bool music)
+    {
+        playMusic = music;
     }
 }
