@@ -60,7 +60,7 @@ public class DialogueWindow : MonoBehaviour
 
     void OnGUI()
     {
-        guiStyle.fontSize = 10;
+        guiStyle.fontSize = 14;
         guiStyle.normal.textColor = Color.white;
         if (show)
         {
@@ -83,9 +83,9 @@ public class DialogueWindow : MonoBehaviour
 
 
 
-            GUI.DrawTexture(new Rect(Screen.width / 2 - 150, Screen.height * 3 / 5, 350, 200), targetTexture);
+            GUI.DrawTexture(new Rect(Screen.width / 2 - 650/2, Screen.height * 3 / 5, 650, 400), targetTexture);
 
-            GUI.Label(new Rect(Screen.width / 2 - 150 + 10, Screen.height * 3 / 5 + 10, 300, 20), actor.Questions[current_option_set], guiStyle);
+            GUI.Label(new Rect(Screen.width / 2 - 650 / 2 + 10, Screen.height * 3 / 5 + 10, 300, 20), actor.Questions[current_option_set], guiStyle);
 
             List<string> optionsTmp = actor.Dialogue[current_option_set];
             List<string> optionConditions = actor.OptionConditions[current_option_set];
@@ -191,9 +191,14 @@ public class DialogueWindow : MonoBehaviour
                 string msg = "";
                 if (cursor == i) msg += ">>> ";
                 msg += options[i];
-                //if (String.IsNullOrEmpty(options[i])) ++cursor;
-
-                GUI.Label(new Rect(Screen.width / 2 - 150 + 10, Screen.height * 3 / 5 + 50 + 15 * (i + 1), 300, 20), msg, guiStyle);
+                //dopisane mozna wykomentowac
+                /*
+                if (String.IsNullOrEmpty(options[i]))
+                {
+                    if (cursor <= options.Count - 2) ++cursor;
+                }
+                */
+                GUI.Label(new Rect(Screen.width / 2 - 650/2 + 10, Screen.height * 3 / 5 + 120 + 15 * (i + 1), 300, 20), msg, guiStyle);
             }
         }
 
