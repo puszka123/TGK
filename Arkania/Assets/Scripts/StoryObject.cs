@@ -248,7 +248,7 @@ public class StoryObject : MonoBehaviour
 
     void ShowEnd()
     {
-
+        Player.SendMessage("EndTheGame");
     }
 
     public void KidFound()

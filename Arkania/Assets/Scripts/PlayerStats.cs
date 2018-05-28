@@ -48,6 +48,8 @@ public class PlayerStats : MonoBehaviour
     bool menu = false;
     float pressed;
     bool alive = true;
+    bool end = false;
+    GUIStyle guiStyle = new GUIStyle();
 
     void Awake()
     {
@@ -62,6 +64,25 @@ public class PlayerStats : MonoBehaviour
 
     void OnGUI()
     {
+        if(end)
+        {
+            guiStyle.fontSize = 20;
+            //guiStyle.normal.textColor = Color.red;
+            guiStyle.fontStyle = FontStyle.Bold;
+            var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            texture.SetPixel(0, 0, new Color(0f, 0f, 0f, 1f));
+            texture.Apply();
+            string text = "Koniec!";
+            GUIContent content = new GUIContent(text);
+            Vector2 size = guiStyle.CalcSize(content);
+            guiStyle.normal = new GUIStyleState { textColor = Color.white, background = texture };
+            GUI.Label(new Rect(Screen.width / 2 - size.x/2, Screen.height/2 - 100, size.x, size.y), content, guiStyle);
+            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2, 70, 70), "Zakończ"))
+            {
+                Application.Quit();
+            }
+        }
+
         GUI.DrawTexture(new Rect(Screen.width - barWidth - 10,
                                  Screen.height - barHeight * 3 - 30,
                                  currentHealth * barWidth / maxHealth,
@@ -83,7 +104,7 @@ public class PlayerStats : MonoBehaviour
             chCont.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            if (GUI.Button(new Rect(Screen.width / 2 - 50 / 2, Screen.height / 2 - 30 / 2, 70, 70), "Powtórz"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2 - 30 / 2, 70, 70), "Powtórz"))
             {
                 GameObject.FindGameObjectWithTag("storyobject").SendMessage("SecondChance");
                 fpsC.enabled = true;
@@ -96,7 +117,7 @@ public class PlayerStats : MonoBehaviour
                 alive = true;
                 
             }
-            if (GUI.Button(new Rect(Screen.width / 2 - 50 / 2, Screen.height / 2 + 90 - 30 / 2, 70, 70), "Zakończ"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2 + 90 - 30 / 2, 70, 70), "Zakończ"))
             {
                 Application.Quit();
             }
@@ -104,14 +125,14 @@ public class PlayerStats : MonoBehaviour
 
         if (menu)
         {
-            if (GUI.Button(new Rect(Screen.width / 2 - 50 / 2, Screen.height / 2 - 30 / 2, 70, 70), "Wznów"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2 - 30 / 2, 70, 70), "Wznów"))
             {
                 Cursor.visible = false;
                 menu = false;
                 fpsC.enabled = true;
                 chCont.enabled = true;
             }
-            if (GUI.Button(new Rect(Screen.width / 2 - 50 / 2, Screen.height / 2 + 90 - 30 / 2, 70, 70), "Zakończ"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2 + 90 - 30 / 2, 70, 70), "Zakończ"))
             {
                 Application.Quit();
             }
@@ -280,4 +301,11 @@ public class PlayerStats : MonoBehaviour
         haveSecondChance = true;
     }
 
+    public void EndTheGame()
+    {
+        fpsC.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        end = true;
+    }
 }
