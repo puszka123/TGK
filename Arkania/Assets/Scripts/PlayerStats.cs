@@ -28,7 +28,7 @@ public class PlayerStats : MonoBehaviour
     public float walkSpeed = 10.0f;
     public float runSpeed = 20.0f;
 
-    public float AttackDistance  = 3.2f;
+    public float AttackDistance = 3.2f;
     public float AttackDelay = 0.5f;
     public float AttackDamage = 10f;
     private RaycastHit hit;
@@ -43,6 +43,11 @@ public class PlayerStats : MonoBehaviour
     bool isWalking;
     float originalSpeed;
     float speedTimer;
+    bool haveSecondChance = false;
+    bool showRestartButton = false;
+    bool menu = false;
+    float pressed;
+    bool alive = true;
 
     void Awake()
     {
@@ -54,7 +59,7 @@ public class PlayerStats : MonoBehaviour
 
         lastPosition = transform.position;
     }
-   
+
     void OnGUI()
     {
         GUI.DrawTexture(new Rect(Screen.width - barWidth - 10,
@@ -72,6 +77,45 @@ public class PlayerStats : MonoBehaviour
                                  currentStamina * barWidth / maxStamina,
                                  barHeight),
                         staminaTexture);
+        if (showRestartButton && !menu)
+        {
+            fpsC.enabled = false;
+            chCont.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            if (GUI.Button(new Rect(Screen.width / 2 - 50 / 2, Screen.height / 2 - 30 / 2, 70, 70), "Powtórz"))
+            {
+                GameObject.FindGameObjectWithTag("storyobject").SendMessage("SecondChance");
+                fpsC.enabled = true;
+                fpsC.CanMove = true;
+                chCont.enabled = true;
+                Cursor.visible = false;
+                showRestartButton = false;
+                currentHealth = maxHealth;
+                animator.SetTrigger("alive");
+                alive = true;
+                
+            }
+            if (GUI.Button(new Rect(Screen.width / 2 - 50 / 2, Screen.height / 2 + 90 - 30 / 2, 70, 70), "Zakończ"))
+            {
+                Application.Quit();
+            }
+        }
+
+        if (menu)
+        {
+            if (GUI.Button(new Rect(Screen.width / 2 - 50 / 2, Screen.height / 2 - 30 / 2, 70, 70), "Wznów"))
+            {
+                Cursor.visible = false;
+                menu = false;
+                fpsC.enabled = true;
+                chCont.enabled = true;
+            }
+            if (GUI.Button(new Rect(Screen.width / 2 - 50 / 2, Screen.height / 2 + 90 - 30 / 2, 70, 70), "Zakończ"))
+            {
+                Application.Quit();
+            }
+        }
     }
 
     void Start()
@@ -89,7 +133,19 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        if(walkSpeed < originalSpeed)
+        if ((Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Escape)) && pressed < 0f)
+        {
+            pressed = 0.2f;
+            menu = !menu;
+            //fpsC.CanMove = !fpsC.CanMove;
+            fpsC.enabled = !fpsC.enabled;
+            chCont.enabled = !chCont.enabled;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = !Cursor.visible;
+        }
+        pressed -= Time.deltaTime;
+
+        if (walkSpeed < originalSpeed)
         {
             if (speedTimer <= 0f)
             {
@@ -136,9 +192,9 @@ public class PlayerStats : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.Z))
-        {       
-            if(lastPressed <= 0f)
+        if (Input.GetKey(KeyCode.Z))
+        {
+            if (lastPressed <= 0f)
             {
                 lastPressed = 0.2f;
                 isSword = !isSword;
@@ -187,10 +243,16 @@ public class PlayerStats : MonoBehaviour
         currentHealth -= damage;
         walkSpeed = 3.5f;
         runSpeed = 5.5f;
-        if(currentHealth <=0f)
+        if (currentHealth <= 0f && alive)
         {
+            alive = false;
+            Debug.Log("die");
             SendMessage("DieNow");
             fpsC.CanMove = false;
+            if (haveSecondChance)
+            {
+                showRestartButton = true;
+            }
         }
         fpsC.SendMessage("ChangeSpeed", walkSpeed);
         fpsC.SendMessage("ChangeRunSpeed", runSpeed);
@@ -211,6 +273,11 @@ public class PlayerStats : MonoBehaviour
     public void IsWalking(bool value)
     {
         isWalking = value;
+    }
+
+    public void HaveSecondChance()
+    {
+        haveSecondChance = true;
     }
 
 }

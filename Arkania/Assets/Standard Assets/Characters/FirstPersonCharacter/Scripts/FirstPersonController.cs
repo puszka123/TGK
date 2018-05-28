@@ -347,5 +347,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             animator.SetTrigger("die");
         }
+
+        public void Alive()
+        {
+            Debug.Log("alive");
+            animator.SetTrigger("alive");
+        }
     }
 }

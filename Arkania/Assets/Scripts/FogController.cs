@@ -33,6 +33,7 @@ public class FogController : MonoBehaviour {
                 Debug.Log("change light");
                 light.intensity = 0f;
                 PlayerObject.SendMessage("PlayHorrorMusic", true);
+                GameObject.FindGameObjectWithTag("storyobject").SendMessage("ActivateBlocker");
             }
         }
     }

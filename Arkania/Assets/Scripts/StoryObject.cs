@@ -26,6 +26,7 @@ public class StoryObject : MonoBehaviour
     int kidCount = 0;
     public GameObject LastLocation;
     public GameObject DownStairs;
+    public GameObject Blocker;
 
 
     // Use this for initialization
@@ -50,6 +51,7 @@ public class StoryObject : MonoBehaviour
             item.SetActive(false);
         }
         DownStairs.SetActive(false);
+        Blocker.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -130,7 +132,31 @@ public class StoryObject : MonoBehaviour
 
     public void CompleteMission(string missionComplete)
     {
+        string mission1;
+        string mission2;
         Debug.Log("completing mission " + missionComplete);
+        if(missionComplete == "find_childrenfind_moner")
+        {
+            mission1 = "find_children";
+            mission2 = "find_moner";
+            for (int i = 0; i < missions.Count; i++)
+            {
+                if (mission1 == (string)missions[i])
+                {
+                    missionStatuses[i] = true;
+                    break;
+                }
+            }
+            for (int i = 0; i < missions.Count; i++)
+            {
+                if (mission2 == (string)missions[i])
+                {
+                    missionStatuses[i] = true;
+                    break;
+                }
+            }
+            return;
+        }
         if (missionComplete == "rim_find_gold")
         {
             _activateTime = false;
@@ -232,5 +258,20 @@ public class StoryObject : MonoBehaviour
         {
             CompleteMission("find_children");
         }
+    }
+
+    public void ActivateBlocker()
+    {
+        if (DownStairs.activeSelf)
+        {
+            Blocker.SetActive(true);
+            Player.SendMessage("HaveSecondChance");
+        }
+    }
+
+    public void SecondChance()
+    {
+        Player.transform.SetPositionAndRotation(LastLocation.transform.position, Player.transform.rotation);
+        //Player.SendMessage("Alive");
     }
 }

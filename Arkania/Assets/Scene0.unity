@@ -1211,7 +1211,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5314507, z: 37.529858}
+  m_Size: {x: 0.01, y: 2, z: 37.529858}
   m_Center: {x: 0, y: 0.26572573, z: -5.3406587}
 --- !u!1 &79323668
 GameObject:
@@ -3743,6 +3743,47 @@ SkinnedMeshRenderer:
     m_Center: {x: -5.820766e-11, y: 0.0066042994, z: -0.00015744806}
     m_Extent: {x: 0.00060249475, y: 0.0006125611, z: 0.0003921903}
   m_DirtyAABB: 0
+--- !u!1 &152764890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 152764891}
+  - component: {fileID: 152764892}
+  m_Layer: 0
+  m_Name: LastBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &152764891
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 152764890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 505.44, y: 100, z: 268.0234}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &152764892
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 152764890}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 31.52, z: 200}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &155900260
 GameObject:
   m_ObjectHideFlags: 0
@@ -28974,6 +29015,7 @@ MonoBehaviour:
   - {fileID: 2045183082}
   LastLocation: {fileID: 137480336}
   DownStairs: {fileID: 1869342833}
+  Blocker: {fileID: 152764890}
 --- !u!4 &1482829600
 Transform:
   m_ObjectHideFlags: 0
@@ -37451,7 +37493,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1947778677}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de444ad6a22f61a48bb197c182037625, type: 3}
   m_Name: 
@@ -41178,6 +41220,14 @@ Prefab:
     - target: {fileID: 8200000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Volume
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 12474086, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
