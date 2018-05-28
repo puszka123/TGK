@@ -60,11 +60,21 @@ public class DialogueWindow : MonoBehaviour
 
     void OnGUI()
     {
-        guiStyle.fontSize = 14;
-        guiStyle.normal.textColor = Color.white;
+        //guiStyle.fontSize = 14;
+        //guiStyle.normal.textColor = Color.white;
         if (show)
         {
-
+            guiStyle.fontSize = 20;
+            //guiStyle.normal.textColor = Color.red;
+            guiStyle.fontStyle = FontStyle.Bold;
+            var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            texture.SetPixel(0, 0, new Color(0f, 0f, 0f, 0.7f));
+            texture.Apply();
+            GUIContent content;
+            System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+            //Vector2 size = guiStyle.CalcSize(content);
+            guiStyle.normal = new GUIStyleState { textColor = Color.white, background = texture };
+            /*
             Texture2D targetTexture = new Texture2D(350, 200);
             //GetComponent<Renderer>().material.mainTexture = targetTexture;
 
@@ -84,8 +94,13 @@ public class DialogueWindow : MonoBehaviour
 
 
             GUI.DrawTexture(new Rect(Screen.width / 2 - 650/2, Screen.height * 3 / 5, 650, 400), targetTexture);
-
+           
             GUI.Label(new Rect(Screen.width / 2 - 650 / 2 + 10, Screen.height * 3 / 5 + 10, 300, 20), actor.Questions[current_option_set], guiStyle);
+            */
+            stringBuilder.Append(actor.actorName + ": ");
+            stringBuilder.Append(actor.Questions[current_option_set]);
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine();
 
             List<string> optionsTmp = actor.Dialogue[current_option_set];
             List<string> optionConditions = actor.OptionConditions[current_option_set];
@@ -188,8 +203,8 @@ public class DialogueWindow : MonoBehaviour
 
             for (int i = 0; i < options.Count; i++)
             {
-                string msg = "";
-                if (cursor == i) msg += ">>> ";
+                string msg = " ";
+                if (cursor == i) msg = ">>> ";
                 msg += options[i];
                 //dopisane mozna wykomentowac
                 /*
@@ -198,8 +213,12 @@ public class DialogueWindow : MonoBehaviour
                     if (cursor <= options.Count - 2) ++cursor;
                 }
                 */
-                GUI.Label(new Rect(Screen.width / 2 - 650/2 + 10, Screen.height * 3 / 5 + 120 + 15 * (i + 1), 300, 20), msg, guiStyle);
+                stringBuilder.AppendLine(msg);
+                //GUI.Label(new Rect(Screen.width / 2 - 650/2 + 10, Screen.height * 3 / 5 + 120 + 15 * (i + 1), 300, 20), msg, guiStyle);
             }
+            content = new GUIContent(stringBuilder.ToString());
+            Vector2 size = guiStyle.CalcSize(content);
+            GUI.Label(new Rect(Screen.width / 2 - size.x / 2, Screen.height - size.y-10, size.x, size.y), content, guiStyle);
         }
 
     }
