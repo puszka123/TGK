@@ -5,7 +5,7 @@ using UnityEngine;
 public class DialogueRaycast : MonoBehaviour {
     private RaycastHit hit;
     private Vector3 fwd;
-    private float range = 999.0f;
+    private float range = 15.0f;
     private bool visible = false;
 
     public DialogueWindow window;
@@ -26,7 +26,7 @@ public class DialogueRaycast : MonoBehaviour {
         int layerMask = 1 << 8;
 
         layerMask = ~layerMask;
-        if (Physics.Raycast(transform.position, fwd, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position, fwd, out hit, range, layerMask))
         {
             DialogueActor actor = hit.transform.gameObject.GetComponent<DialogueActor>();
             if (actor != null)
@@ -41,7 +41,7 @@ public class DialogueRaycast : MonoBehaviour {
             if (lastPressed + 0.2f < Time.time)
             {
                 lastPressed = Time.time;
-                if (Physics.Raycast(transform.position, fwd, out hit, Mathf.Infinity, layerMask))
+                if (Physics.Raycast(transform.position, fwd, out hit, range, layerMask))
                 {
                     if (hit.distance < range)
                     {

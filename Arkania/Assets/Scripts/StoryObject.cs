@@ -143,7 +143,7 @@ public class StoryObject : MonoBehaviour
         {
             if (prologpart < prologueText.Count)
             {
-                guiStyle.fontSize = 20;
+                guiStyle.fontSize = Screen.height / 50;
                 //guiStyle.normal.textColor = Color.red;
                 //guiStyle.fontStyle = FontStyle.Bold;
                 var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);

@@ -58,7 +58,7 @@ public class DialogueWindow : MonoBehaviour
         //guiStyle.normal.textColor = Color.white;
         if (show)
         {
-            guiStyle.fontSize = 20;
+            guiStyle.fontSize = Screen.height/50;
             //guiStyle.normal.textColor = Color.red;
             //guiStyle.fontStyle = FontStyle.Bold;
             var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);

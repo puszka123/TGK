@@ -67,7 +67,7 @@ public class PlayerStats : MonoBehaviour
     {
         if(end)
         {
-            guiStyle.fontSize = 20;
+            guiStyle.fontSize = Screen.height / 50;
             //guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
             var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
@@ -78,7 +78,7 @@ public class PlayerStats : MonoBehaviour
             Vector2 size = guiStyle.CalcSize(content);
             guiStyle.normal = new GUIStyleState { textColor = Color.white, background = texture };
             GUI.Label(new Rect(Screen.width / 2 - size.x/2, Screen.height/2 - 100, size.x, size.y), content, guiStyle);
-            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2, 70, 70), "Zakończ"))
+            if (GUI.Button(new Rect(Screen.width / 2 - size.x / 2, Screen.height / 2, size.x, size.y), "Zakończ"))
             {
                 Application.Quit();
             }

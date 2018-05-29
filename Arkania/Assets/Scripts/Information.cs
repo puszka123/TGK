@@ -33,7 +33,7 @@ public class Information : MonoBehaviour
     {
         if (_canTalk && _noAction)
         {
-            guiStyle.fontSize = 20;
+            guiStyle.fontSize = Screen.height / 50;
             //guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
             var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
@@ -47,7 +47,7 @@ public class Information : MonoBehaviour
         }
         if (!_noAction)
         {
-            guiStyle.fontSize = 20;
+            guiStyle.fontSize = Screen.height / 50;
             guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
             var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
@@ -61,7 +61,7 @@ public class Information : MonoBehaviour
         }
         if (_showTime)
         {
-            guiStyle.fontSize = 20;
+            guiStyle.fontSize = Screen.height / 50;
             guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
             var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
@@ -78,7 +78,7 @@ public class Information : MonoBehaviour
 
         if(important)
         {
-            guiStyle.fontSize = 20;
+            guiStyle.fontSize = Screen.height/50;
             guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
             var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
