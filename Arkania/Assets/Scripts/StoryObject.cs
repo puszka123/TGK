@@ -42,7 +42,7 @@ public class StoryObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Player.SetActive(false);
+        //Player.SetActive(false);
        // FogZombies.SetActive(false);
         RimZombie.SetActive(false);
         others = GameObject.FindGameObjectsWithTag("actor");
