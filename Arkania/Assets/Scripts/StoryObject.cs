@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System.Text;
 
 public class StoryObject : MonoBehaviour
 {
@@ -32,10 +33,16 @@ public class StoryObject : MonoBehaviour
     public Text ActiveList;
     public Text DoneList;
     QuestDescription questDescription = new QuestDescription();
+    bool prolog = true;
+    int prologpart = 0;
+    int prologMaxPart = 2;
+    List<StringBuilder> prologueText = new List<StringBuilder>();
+    GUIStyle guiStyle = new GUIStyle();
 
     // Use this for initialization
     void Start()
     {
+        Player.SetActive(false);
        // FogZombies.SetActive(false);
         RimZombie.SetActive(false);
         others = GameObject.FindGameObjectsWithTag("actor");
@@ -56,10 +63,40 @@ public class StoryObject : MonoBehaviour
         }
         DownStairs.SetActive(false);
         Blocker.SetActive(false);
+
+        //to do: fill prologue text
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine("Rodzinna wioska Luny");
+        stringBuilder.AppendLine();
+        stringBuilder.AppendLine("Z mojej rodzinnej wsi dochodziły plotki o nieznanej chorobie.");
+        stringBuilder.AppendLine("Po pewnym czasie wszyscy mieszkańcy nagle zniknęli.");
+        stringBuilder.AppendLine("Jako dowódca dostałam rozkaz spalenia całej miejscowości co miało uspokoić sytuację na wyspie.");
+        stringBuilder.AppendLine("Tak też zrobiłam.");
+        prologueText.Add(stringBuilder);
+
+        StringBuilder stringBuilder1 = new StringBuilder();
+        stringBuilder1.AppendLine("Miasto Rhodi położone najbliżej rodzinnej wsi");
+        stringBuilder1.AppendLine();
+        stringBuilder1.AppendLine("Arthemon(namiestnik miasta): Wezwałem cię Luna, gdyż doszły nas słuchy o kolejnym przypadku.");
+        stringBuilder1.AppendLine("Nie mogę tego tak zostawić. Pojedziesz do wsi Ymera i sprawdzisz czy plotki są prawdziwe");
+        stringBuilder1.AppendLine("Prześlij informację jak najszybciej, sytuacja staje się nieprzyjemna.");
+        prologueText.Add(stringBuilder1);
+
+        StringBuilder stringBuilder2 = new StringBuilder();
+        stringBuilder2.AppendLine("Miejsce akcji: Ymera");
+        prologueText.Add(stringBuilder2);
     }
 
     void Update()
     {
+        if(prolog)
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                ++prologpart;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (QuestPanel.gameObject.activeInHierarchy)
@@ -91,7 +128,7 @@ public class StoryObject : MonoBehaviour
                 {
                     item.SetActive(false);
                 }
-                GameObject.FindGameObjectWithTag("storyobject").SendMessage("SetAction", "Czas upłynał! Nie udało sie wykonać misji!");
+                GameObject.FindGameObjectWithTag("storyobject").SendMessage("SetAction", "Czas upłynął! Nie udało sie wykonać misji!");
                 _activateTime = false;
                 GameObject.FindGameObjectWithTag("storyobject").SendMessage("DisableTime");
             }
@@ -102,6 +139,51 @@ public class StoryObject : MonoBehaviour
     // Update is called once per frame
     void OnGUI()
     {
+        if(prolog)
+        {
+            if (prologpart < prologueText.Count)
+            {
+                guiStyle.fontSize = 20;
+                //guiStyle.normal.textColor = Color.red;
+                //guiStyle.fontStyle = FontStyle.Bold;
+                var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+                texture.SetPixel(0, 0, new Color(1f, 1f, 1f, 1f));
+                texture.Apply();
+                GUIContent content = new GUIContent(prologueText[prologpart].ToString());
+                Vector2 size = guiStyle.CalcSize(content);
+                guiStyle.normal = new GUIStyleState { textColor = Color.black, background = texture };
+
+                //added
+                Texture2D targetTexture = new Texture2D(Screen.width, Screen.height);
+                //GetComponent<Renderer>().material.mainTexture = targetTexture;
+
+                Color[] fillColorArray = targetTexture.GetPixels();
+
+                for (int i = 0; i < fillColorArray.Length; ++i)
+                {
+                    Color color = Color.white;
+                    color.a = 1f;
+                    fillColorArray[i] = color;
+                }
+
+                targetTexture.SetPixels(fillColorArray);
+
+                targetTexture.Apply();
+
+
+
+                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), targetTexture);
+                //added
+
+                GUI.Label(new Rect(Screen.width/2 - size.x/2, Screen.height/3 - size.y/2, Screen.width, Screen.height), content, guiStyle);
+            }
+            else
+            {
+                prolog = false;
+                Player.SetActive(true);
+            }
+        }
+
        string active="";
         string done="";
         

@@ -155,6 +155,8 @@ public class PlayerStats : MonoBehaviour
             texture.Apply();
             System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
             stringBuilder.AppendLine("WASD: Ruch postaci");
+            stringBuilder.AppendLine("Z: wyciągnięcie miecza (Żeby atakować trzeba najpierw użyć Z!!!)");
+            stringBuilder.AppendLine("Lewy przycisk myszy: Atak");
             stringBuilder.AppendLine("I: Dziennik misji");
             stringBuilder.AppendLine("G: Rzut przedmiotem");
             stringBuilder.AppendLine("Lewy shift: sprint");
