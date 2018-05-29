@@ -25,6 +25,7 @@ public class StoneTaker : MonoBehaviour
             if (other.gameObject == Player && Input.GetKey(KeyCode.E))
             {
                 gameObject.SetActive(false);
+                GameObject.FindGameObjectWithTag("storyobject").SendMessage("SetImportant", "Użyj G by rzucić kamień");
                 other.SendMessage("TakeStone");
             }
     }

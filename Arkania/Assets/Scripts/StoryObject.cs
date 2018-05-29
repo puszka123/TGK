@@ -119,6 +119,7 @@ public class StoryObject : MonoBehaviour
 
     public void AddMission(string mission)
     {
+        SendMessage("SetImportant", "Zaktualizowano dziennik misji!");
         Debug.Log("adding mission " + mission);
         if (missions.Contains(mission)) return;
         //if both are true then activate Rim
@@ -166,6 +167,7 @@ public class StoryObject : MonoBehaviour
 
     public void CompleteMission(string missionComplete)
     {
+        SendMessage("SetImportant", "Zaktualizowano dziennik misji!");
         string mission1;
         string mission2;
         Debug.Log("completing mission " + missionComplete);

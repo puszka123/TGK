@@ -49,6 +49,7 @@ public class PlayerStats : MonoBehaviour
     float pressed;
     bool alive = true;
     bool end = false;
+    bool keyboard = false;
     GUIStyle guiStyle = new GUIStyle();
 
     void Awake()
@@ -84,15 +85,17 @@ public class PlayerStats : MonoBehaviour
         }
 
         GUI.DrawTexture(new Rect(Screen.width - barWidth - 10,
-                                 Screen.height - barHeight * 3 - 30,
+                                 Screen.height - barHeight * 2 - 20,
                                  currentHealth * barWidth / maxHealth,
                                  barHeight),
                         healthTexture);
+        /*
         GUI.DrawTexture(new Rect(Screen.width - barWidth - 10,
                                  Screen.height - barHeight * 2 - 20,
                                  currentMana * barWidth / maxMana,
                                  barHeight),
                         manaTexture);
+                        */
         GUI.DrawTexture(new Rect(Screen.width - barWidth - 10,
                                  Screen.height - barHeight - 10,
                                  currentStamina * barWidth / maxStamina,
@@ -132,9 +135,40 @@ public class PlayerStats : MonoBehaviour
                 fpsC.enabled = true;
                 chCont.enabled = true;
             }
-            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2 + 90 - 30 / 2, 70, 70), "Zakończ"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2 + 90 - 30 / 2, 80, 70), "Sterowanie"))
+            {
+                menu = false;
+                keyboard = true;
+            }
+            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2 + 180 - 30 / 2, 70, 70), "Zakończ"))
             {
                 Application.Quit();
+            }
+        }
+        if(keyboard)
+        {
+            guiStyle.fontSize = 20;
+            //guiStyle.normal.textColor = Color.red;
+            guiStyle.fontStyle = FontStyle.Bold;
+            var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            texture.SetPixel(0, 0, new Color(0f, 0f, 0f, 1f));
+            texture.Apply();
+            System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+            stringBuilder.AppendLine("WASD: Ruch postaci");
+            stringBuilder.AppendLine("I: Dziennik misji");
+            stringBuilder.AppendLine("G: Rzut przedmiotem");
+            stringBuilder.AppendLine("Lewy shift: sprint");
+            stringBuilder.AppendLine("Esc: Menu");
+            stringBuilder.AppendLine("E: Rozmawiaj/Podnieś/Użyj");
+            GUIContent content = new GUIContent(stringBuilder.ToString());
+            Vector2 size = guiStyle.CalcSize(content);
+            guiStyle.normal = new GUIStyleState { textColor = Color.white, background = texture };
+            GUI.Label(new Rect(Screen.width / 2 - size.x / 2, Screen.height / 2 - size.y/2, size.x, size.y), content, guiStyle);
+
+            if (GUI.Button(new Rect(Screen.width / 2 - 70 / 2, Screen.height / 2 - size.y / 2 + size.y + 10, 70, 70), "Wróć"))
+            {
+                menu = true;
+                keyboard = false;
             }
         }
     }
@@ -154,7 +188,7 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Escape)) && pressed < 0f)
+        if (Input.GetKey(KeyCode.Escape) && pressed < 0f)
         {
             pressed = 0.2f;
             menu = !menu;

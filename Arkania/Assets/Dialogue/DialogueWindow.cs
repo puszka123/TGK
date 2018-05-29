@@ -50,12 +50,6 @@ public class DialogueWindow : MonoBehaviour
             //if (cursor <= actor.Dialogue[current_option_set].Count - 2) cursor++;
             if (cursor <= options.Count - 2) cursor++;
         }
-
-        //test
-        if (Input.GetKey(KeyCode.C))
-        {
-            story.CompleteMission("find_children");
-        }
     }
 
     void OnGUI()
@@ -66,7 +60,7 @@ public class DialogueWindow : MonoBehaviour
         {
             guiStyle.fontSize = 20;
             //guiStyle.normal.textColor = Color.red;
-            guiStyle.fontStyle = FontStyle.Bold;
+            //guiStyle.fontStyle = FontStyle.Bold;
             var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
             texture.SetPixel(0, 0, new Color(0f, 0f, 0f, 0.7f));
             texture.Apply();

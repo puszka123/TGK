@@ -13,6 +13,8 @@ public class Information : MonoBehaviour
     string _actionMessage = "";
     float _elapsedTime = 60f;
     bool _showTime = false;
+    bool important = false;
+    string importantMessage = "";
  
 
     // Use this for initialization
@@ -73,12 +75,29 @@ public class Information : MonoBehaviour
             GUI.Label(new Rect(Screen.width / 2 - 50, 80, size.x, size.y), content, guiStyle);
             GUI.Label(new Rect(Screen.width / 2 - 50, 100, size1.x, size1.y), content1, guiStyle);
         }
+
+        if(important)
+        {
+            guiStyle.fontSize = 20;
+            guiStyle.normal.textColor = Color.red;
+            guiStyle.fontStyle = FontStyle.Bold;
+            var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            texture.SetPixel(0, 0, new Color(0f, 0f, 0f, 0.7f));
+            texture.Apply();
+            GUIContent content = new GUIContent(importantMessage);
+            Vector2 size = guiStyle.CalcSize(content);
+            guiStyle.normal = new GUIStyleState { textColor = Color.white, background = texture };
+            GUI.Label(new Rect(Screen.width / 2 - size.x/2, Screen.height / 2 - size.y / 2, size.x, size.y), content, guiStyle);
+            StartCoroutine(DisableActionMessage());
+            StartCoroutine(DisableActionMessage());
+        }
     }
 
     IEnumerator DisableActionMessage()
     {
         yield return new WaitForSeconds(5);
         _noAction = true;
+        important = false;
     }
 
     public void ActivateTalk(string npcName)
@@ -109,5 +128,12 @@ public class Information : MonoBehaviour
     public void DisableTime()
     {
         _showTime = false;
+    }
+
+    public void SetImportant(string message)
+    {
+        StopAllCoroutines();
+        important = true;
+        importantMessage = message;
     }
 }
