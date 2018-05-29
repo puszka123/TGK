@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class StoryObject : MonoBehaviour
 {
@@ -27,7 +28,10 @@ public class StoryObject : MonoBehaviour
     public GameObject LastLocation;
     public GameObject DownStairs;
     public GameObject Blocker;
-
+    public GameObject QuestPanel;
+    public Text ActiveList;
+    public Text DoneList;
+    QuestDescription questDescription = new QuestDescription();
 
     // Use this for initialization
     void Start()
@@ -54,6 +58,28 @@ public class StoryObject : MonoBehaviour
         Blocker.SetActive(false);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (QuestPanel.gameObject.activeInHierarchy)
+            {
+                
+                QuestPanel.gameObject.SetActive(false);
+               
+            }
+
+            else
+            {
+                
+                QuestPanel.gameObject.SetActive(true);
+                
+            }
+            
+        }
+            
+    }
+
     private void FixedUpdate()
     {
         if (_activateTime)
@@ -76,11 +102,19 @@ public class StoryObject : MonoBehaviour
     // Update is called once per frame
     void OnGUI()
     {
+       string active="";
+        string done="";
+        
         for (int i = 0; i < missions.Count; i++)
         {
-            GUI.Label(new Rect(10, 10 + 30 * i, 300, 300), missions[i] + " " + missionStatuses[i]);
-
+            //GUI.Label(new Rect(10, 10 + 30 * i, 300, 300), missions[i] + " " + missionStatuses[i]);
+            if(!missionStatuses[i])
+                active += (questDescription.getDescription(missions[i]) + "\n\n");
+            else
+                done += (questDescription.getDescription(missions[i]) + "\n\n");
         }
+        ActiveList.text = active;
+        DoneList.text = done;
     }
 
     public void AddMission(string mission)

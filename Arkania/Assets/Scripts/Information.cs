@@ -13,6 +13,7 @@ public class Information : MonoBehaviour
     string _actionMessage = "";
     float _elapsedTime = 60f;
     bool _showTime = false;
+ 
 
     // Use this for initialization
     void Start()
