@@ -24,7 +24,7 @@ public class PickerGUI : MonoBehaviour
         //show what the player can pick
         if (_show)
         {
-            guiStyle.fontSize = 20;
+            guiStyle.fontSize = Screen.height / 40;
             guiStyle.normal.textColor = Color.red;
             guiStyle.fontStyle = FontStyle.Bold;
             var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
@@ -35,13 +35,13 @@ public class PickerGUI : MonoBehaviour
             {
                 GUIContent content = new GUIContent("Podnieś " + ObjectName);
                 Vector2 size = guiStyle.CalcSize(content);
-                GUI.Label(new Rect(Screen.width / 2 - 50, 50, size.x, size.y), content, guiStyle);
+                GUI.Label(new Rect(Screen.width / 2 - size.x/2, 50, size.x, size.y), content, guiStyle);
             }
             else
             {
                 GUIContent content = new GUIContent("Otwórz " + ObjectName);
                 Vector2 size = guiStyle.CalcSize(content);
-                GUI.Label(new Rect(Screen.width / 2 - 50, 50, 100, 100), content, guiStyle);
+                GUI.Label(new Rect(Screen.width / 2 - -size.x/2, 50, size.x, size.y), content, guiStyle);
             }
         }
     }

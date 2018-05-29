@@ -138,7 +138,7 @@ public class ZombieAI : MonoBehaviour
 
     IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1.5f);
         gameObject.SetActive(false);
     }
 

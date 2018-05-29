@@ -143,7 +143,7 @@ public class StoryObject : MonoBehaviour
         {
             if (prologpart < prologueText.Count)
             {
-                guiStyle.fontSize = Screen.height / 50;
+                guiStyle.fontSize = Screen.height / 40;
                 //guiStyle.normal.textColor = Color.red;
                 //guiStyle.fontStyle = FontStyle.Bold;
                 var texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
@@ -326,6 +326,9 @@ public class StoryObject : MonoBehaviour
     {
         _activateTime = true;
         gameObject.SendMessage("SetAction", "Sprawdź czy Rim ma złoto");
+        Rim.GetComponent<DialogueWindow>().enabled = false;
+        Rim.GetComponent<DialogueActor>().enabled = false;
+        Rim.GetComponent<CapsuleCollider>().enabled = false;
     }
 
     void ActivateLastLocation()
